@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Events & Collective Wisdom | AIVMM{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs"><a href="{{ url_for('web.index') }}">Home</a> / <span>Events</span></nav>
+        <h2 data-aos="fade-up">Sacred Gatherings</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Connecting our global community through culture, faith, and shared purpose.</p>
+    </div>
+</section>
+
+<!-- Content -->
+<section class="section-padding">
+    <div class="container">
+        <!-- Featured Event Card -->
+        <div class="featured-event-card section-fade" data-aos="fade-up">
+            <div class="featured-img-container">
+                <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g4.webp') }}" alt="Featured Event">
+                <div class="event-glow-label">MAIN EVENT</div>
+            </div>
+            <div class="featured-body">
+                <div class="badge">MAY 15-18, 2026</div>
+                <h3>Annual Global Mahasammelan 2026</h3>
+                <p>Experience the grandest gathering of Veerashaiva Lingayath devotees and leaders from across the globe. Four days of spiritual discourse, cultural performances, and strategic planning for community prosperity.</p>
+                <div class="event-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Palace Grounds, Bangalore</span>
+                    <span><i class="fas fa-clock"></i> 09:00 AM onwards</span>
+                </div>
+                <button class="btn btn-primary">Reserve Your Seat</button>
+            </div>
+        </div>
+
+        <!-- List of events -->
+        <div class="events-masonry-grid" style="margin-top: 80px;">
+            <!-- Event 1 -->
+            <div class="mosaic-event-card" data-aos="fade-up">
+                <div class="mosaic-img">
+                    <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g5.webp') }}" alt="Youth Summit">
+                    <div class="mosaic-date">JUN 22</div>
+                </div>
+                <div class="mosaic-info">
+                    <h4>Youth Leadership Summit</h4>
+                    <p>Empowering the next generation with modern skills rooted in ancient values.</p>
+                    <div class="mosaic-footer">
+                        <span>📍 Mysore</span>
+                        <a href="#" class="btn-text">Register →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="mosaic-event-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="mosaic-img">
+                    <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g6.webp') }}" alt="Spiritual Talk">
+                    <div class="mosaic-date">JUL 10</div>
+                </div>
+                <div class="mosaic-info">
+                    <h4>Vachana Sahitya Sangama</h4>
+                    <p>A profound deep-dive into the spiritual and social impact of Basavanna's vachanas.</p>
+                    <div class="mosaic-footer">
+                        <span>📍 Hubbali (Live)</span>
+                        <a href="#" class="btn-text">Join Webinar →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 3 (Past) -->
+            <div class="mosaic-event-card past-faded" data-aos="fade-up" data-aos-delay="200">
+                <div class="mosaic-img">
+                    <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g7.webp') }}" alt="Health Camp">
+                    <div class="mosaic-date">JAN 05</div>
+                </div>
+                <div class="mosaic-info">
+                    <h4>Free Mega Health Shield Camp</h4>
+                    <p>Providing essential medical services to over 2000 community members in rural areas.</p>
+                    <div class="mosaic-footer">
+                        <span>📍 Bidar</span>
+                        <span class="status-badge">Concluded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

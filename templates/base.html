@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='img/logo.jpg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo.jpg') }}">
+
+    <!-- Browser Theme Color -->
+    <meta name="theme-color" content="#ff9933">
+
+    <!-- Meta Tags -->
+    {% block meta %}
+    <meta name="description"
+        content="Official website of Akhila Bharata Veerashaiva Mahasabha (AIVMM). Preserving tradition, empowering the community, and building a stronger future through cultural heritage and unity.">
+    <meta name="keywords"
+        content="AIVMM, Veerashaiva Mahasabha, Hindu community, Spiritual, Tradition, Community empowerment, Bangalore, Veerashaiva Lingayath">
+    <link rel="canonical" href="https://aivmm.rndvg.com/">
+    {% endblock %}
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Tiro+Devanagari+Hindi:ital@0,400;1,400&family=Noto+Sans+Kannada:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="sacred-pattern">
+    <!-- Sacred Om Watermark (LARGE) -->
+    <div class="sacred-om-watermark">🕉️</div>
+    <div class="sacred-watermark">🔱</div>
+
+    <!-- Top Bar: Flash News Ticker -->
+    <div class="top-bar">
+        <div class="container ticker-container">
+            <div class="ticker-label">
+                <i class="fas fa-bullhorn"></i> FLASH NEWS
+            </div>
+            <div class="ticker-wrap">
+                <div class="ticker">
+                    <a href="{{ url_for('web.membership') }}" class="ticker-item">AIVMM 2026 Membership Drive is now OPEN - Join the
+                        global community today! </a>
+                    <a href="{{ url_for('web.news') }}" class="ticker-item">• New Scholarship Awards announced for outstanding students.
+                    </a>
+                    <a href="{{ url_for('web.events') }}" class="ticker-item">• Upcoming Event: National Cultural Mahasabha scheduled
+                        for October 2026. </a>
+                    <a href="{{ url_for('web.gallery') }}" class="ticker-item">• Digital Archives of historical Vachana manuscripts now
+                        updated in Gallery.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header / Nav -->
+    <header id="main-header">
+        <div class="container nav-container">
+            <a href="{{ url_for('web.index') }}" class="logo-container">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="AIVMM Logo" loading="lazy">
+                <div class="logo-text">
+                    <h1 class="eng-name">All India Veerashaiva Mahasabha</h1>
+                    <h1 class="kan-name">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಾಸಭಾ</h1>
+                </div>
+            </a>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="{{ url_for('web.index') }}" class="{{ 'active' if active_page == 'home' else '' }}">Home</a></li>
+                    <li><a href="{{ url_for('web.about') }}" class="{{ 'active' if active_page == 'about' else '' }}">About</a></li>
+                    <li><a href="{{ url_for('web.officials') }}" class="{{ 'active' if active_page == 'officials' else '' }}">Officials</a></li>
+                    <li><a href="{{ url_for('web.events') }}" class="{{ 'active' if active_page == 'events' else '' }}">Events</a></li>
+                    <li><a href="{{ url_for('web.gallery') }}" class="{{ 'active' if active_page == 'gallery' else '' }}">Gallery</a></li>
+                    <li><a href="{{ url_for('web.membership') }}" class="{{ 'active' if active_page == 'membership' else '' }}">Membership</a></li>
+                    <li><a href="{{ url_for('web.contact') }}" class="{{ 'active' if active_page == 'contact' else '' }}">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle" aria-label="Toggle Menu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Leadership Ribbon -->
+    <div class="leadership-ribbon">
+        <div class="ribbon-track">
+            <!-- Round 1 -->
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/jagadguru-renukacharya.webp') }}"
+                        alt="Adi Jagadguru Shri Renukacharya" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Adi Jagadguru</strong><span>Shri Renukacharya</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/vishwaguru-basavanna.webp') }}"
+                        alt="Jagajyoti Vishwaguru" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Jagajyoti Vishwaguru</strong><span>Bhakti Bhandari
+                        Basaveshwara</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/shivayogi hanagal kumarswamy.webp') }}"
+                        alt="Hanagal Shri Kumara" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Hanagal</strong><span>Shri Kumara Shivayogi</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/eshwar-kandre.webp') }}" alt="National President"
+                        loading="lazy"></div>
+                <div class="ribbon-info"><strong>National President</strong><span>Shri Eshwar Khandre</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/bheemanna-kandre.webp') }}" alt="Honorary President"
+                        loading="lazy"></div>
+                <div class="ribbon-info"><strong>Honorary President</strong><span>Dr. Bheemanna Khandre</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/veena-kashappanavar.webp') }}"
+                        alt="Women's Wing President" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Women's Wing President</strong><span>Veena Kashappanavar</span></div>
+            </div>
+            <!-- Round 2 for seamless loop -->
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/jagadguru-renukacharya.webp') }}"
+                        alt="Adi Jagadguru Shri Renukacharya" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Adi Jagadguru</strong><span>Shri Renukacharya</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/vishwaguru-basavanna.webp') }}"
+                        alt="Jagajyoti Vishwaguru" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Jagajyoti Vishwaguru</strong><span>Bhakti Bhandari
+                        Basaveshwara</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/shivayogi hanagal kumarswamy.webp') }}"
+                        alt="Hanagal Shri Kumara" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Hanagal</strong><span>Shri Kumara Shivayogi</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/eshwar-kandre.webp') }}" alt="National President"
+                        loading="lazy"></div>
+                <div class="ribbon-info"><strong>National President</strong><span>Shri Eshwar Khandre</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/bheemanna-kandre.webp') }}" alt="Honorary President"
+                        loading="lazy"></div>
+                <div class="ribbon-info"><strong>Honorary President</strong><span>Dr. Bheemanna Khandre</span></div>
+            </div>
+            <div class="ribbon-item">
+                <div class="ribbon-img-wrapper"><img src="{{ url_for('static', filename='img/images/veena-kashappanavar.webp') }}"
+                        alt="Women's Wing President" loading="lazy"></div>
+                <div class="ribbon-info"><strong>Women's Wing President</strong><span>Veena Kashappanavar</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Spacer -->
+    <div id="page-spacer"></div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-logo">
+                <div class="logo-text">
+                    <h1 class="eng-name" style="color: var(--secondary-color); font-size: 1.5rem; text-shadow: none;">
+                        All India Veerashaiva Mahasabha</h1>
+                    <h1 class="kan-name" style="color: var(--text-muted); font-size: 0.88rem; text-shadow: none;">ಅಖಿಲ
+                        ಭಾರತ ವೀರಶೈವ ಮಹಾಸಭಾ</h1>
+                </div>
+                <p>Akhila Bharata Veerashaiva Mahasabha. Preserving divine tradition, empowering our community, and
+                    building a resilient future through cultural excellence.</p>
+                <div class="social-links-footer">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('web.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('web.about') }}">Our Vision</a></li>
+                    <li><a href="{{ url_for('web.mission') }}">Mission Page</a></li>
+                    <li><a href="{{ url_for('web.officials') }}">Officials</a></li>
+                    <li><a href="{{ url_for('web.gallery') }}">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Engage</h3>
+                <ul>
+                    <li><a href="{{ url_for('web.membership') }}">Membership</a></li>
+                    <li><a href="{{ url_for('web.events') }}">Events</a></li>
+                    <li><a href="{{ url_for('web.news') }}">News & Awards</a></li>
+                    <li><a href="{{ url_for('web.contact') }}">Contact Us</a></li>
+                    <li><a href="{{ url_for('web.admin_login') }}" style="opacity: 0.5; font-size: 0.85rem;"><i class="fas fa-lock"></i>
+                            Admin Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Office</h3>
+                <ul>
+                    <li>No.17/4, Veerashaiva Bhavan</li>
+                    <li>Bangalore-560080</li>
+                    <li>Phone: 080 23602177</li>
+                    <li>Email: info@veerashaivamahasabha.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Akhila Bharata Veerashaiva Mahasabha. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Controls -->
+    <div class="floating-controls">
+        <a href="{{ url_for('web.membership') }}" class="float-btn membership" title="Apply for Membership">
+            <i class="fas fa-user-plus"></i>
+            <span class="float-label">Apply Membership</span>
+        </a>
+        <a href="{{ url_for('web.news') }}" class="float-btn news" title="News & Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="float-label">News & Updates</span>
+        </a>
+        <a href="https://wa.me/9108023602177" class="float-btn whatsapp" title="Chat on WhatsApp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button id="scrollToTop" class="float-btn scroll-top" title="Scroll to Top">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

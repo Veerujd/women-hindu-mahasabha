@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>About Us</span>
+        </nav>
+        <h2 data-aos>Our Legacy</h2>
+        <p data-aos>Since 1904, Akhila Bharata Veerashaiva Mahasabha has been at the forefront of community empowerment.</p>
+    </div>
+</section>
+
+<!-- Vision & Mission Summary -->
+<section class="section-padding vision-section">
+    <div class="container grid-2 section-fade" data-aos>
+        <div class="content-box" data-aos>
+            <div class="badge">VISION</div>
+            <h3>Building a Stronger Community</h3>
+            <p>Establishing a united and progressive community that thrives on its cultural heritage while embracing modern opportunities for growth and excellence.</p>
+        </div>
+        <div class="content-box" data-aos>
+            <div class="badge">MISSION</div>
+            <h3>Empowering Generations</h3>
+            <p>To preserve our unique traditions, promote education, provide social support, and create a legacy of service for the Veerashaiva Lingayath community globally.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

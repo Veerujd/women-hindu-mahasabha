@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Membership | Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}
+
+{% block content %}
+<!-- Page Hero (SYNCED WITH ABOUT PAGE) -->
+<section class="page-hero section-padding">
+    <div class="container" data-aos="fade-up">
+        <nav class="breadcrumbs" data-aos="fade-down">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>Membership</span>
+        </nav>
+        <h2 data-aos="fade-up">Join our Community</h2>
+        <p data-aos="fade-up" data-aos-delay="100">A unified vision for the Veerashaiva Lingayath community. Join us in our journey of cultural excellence and empowerment.</p>
+    </div>
+</section>
+
+<div class="section-padding">
+    <div class="container">
+        <!-- Extra Fees Section (ABOVE Membership Cards) -->
+        <div class="extra-fees-notce" data-aos="fade-up">
+            <i class="fas fa-info-circle"></i>
+            <p>One-time processing and entrance fee of <strong>₹ 100/-</strong> is required for all new registrations.
+            </p>
+        </div>
+
+        <!-- Membership Categories Grid (12 Items - HORIZONTAL DECENT DESIGN) -->
+        <div class="membership-grid-refined">
+            
+            <!-- 1. Paramadasohi -->
+            <div class="member-card-horizontal" data-aos="fade-up">
+                <div class="icon-box-refined"><i class="fas fa-gem"></i></div>
+                <div class="info-box">
+                    <h3>Paramadasohi</h3>
+                    <span class="fee-tag">₹ 1,00,000/-</span>
+                    <p>Leading patron of the organization with permanent national representative status and voting rights.</p>
+                </div>
+            </div>
+
+            <!-- 2. Mahadasohi -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="50">
+                <div class="icon-box-refined"><i class="fas fa-crown"></i></div>
+                <div class="info-box">
+                    <h3>Mahadasohi</h3>
+                    <span class="fee-tag">₹ 50,000/-</span>
+                    <p>Grand donor with a permanent seat in the Working Committee and active role in global community initiatives.</p>
+                </div>
+            </div>
+
+            <!-- 3. Dasohi -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-box-refined"><i class="fas fa-gift"></i></div>
+                <div class="info-box">
+                    <h3>Dasohi</h3>
+                    <span class="fee-tag">₹ 25,000/-</span>
+                    <p>Honored donor category contributing towards major infrastructure and educational projects of the Mahasabha.</p>
+                </div>
+            </div>
+
+            <!-- 4. Danashiromani -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="150">
+                <div class="icon-box-refined"><i class="fas fa-medal"></i></div>
+                <div class="info-box">
+                    <h3>Danashiromani</h3>
+                    <span class="fee-tag">₹ 10,000/-</span>
+                    <p>Distinguished member recognized at annual national conferences for significant service and support.</p>
+                </div>
+            </div>
+
+            <!-- 5. Mahadani -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box-refined"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="info-box">
+                    <h3>Mahadani</h3>
+                    <span class="fee-tag">₹ 5,000/-</span>
+                    <p>Major contributor focusing on regional scholarship programs and youth empowerment drives.</p>
+                </div>
+            </div>
+
+            <!-- 6. Dani -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="250">
+                <div class="icon-box-refined"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="info-box">
+                    <h3>Dani</h3>
+                    <span class="fee-tag">₹ 2,500/-</span>
+                    <p>Dedicated donor member supporting community development and social welfare programs.</p>
+                </div>
+            </div>
+
+            <!-- 7. Upaposhaka -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box-refined"><i class="fas fa-shield-alt"></i></div>
+                <div class="info-box">
+                    <h3>Upaposhaka</h3>
+                    <span class="fee-tag">₹ 1,000/-</span>
+                    <p>Patron member supporting administrative processing and regional office operations center.</p>
+                </div>
+            </div>
+
+            <!-- 8. Ashrayadatha -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="350">
+                <div class="icon-box-refined"><i class="fas fa-hands-helping"></i></div>
+                <div class="info-box">
+                    <h3>Ashrayadatha</h3>
+                    <span class="fee-tag">₹ 500/-</span>
+                    <p>Supporter category prioritizing local culture and spiritual preservation initiatives.</p>
+                </div>
+            </div>
+
+            <!-- 9. Life Member -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box-refined"><i class="fas fa-infinity"></i></div>
+                <div class="info-box">
+                    <h3>Life Member</h3>
+                    <span class="fee-tag">₹ 1,000/-</span>
+                    <p>Permanent membership with active voting rights and lifetime engagement with the Mahasabha events.</p>
+                </div>
+            </div>
+
+            <!-- 10. Institutional Member -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="450">
+                <div class="icon-box-refined"><i class="fas fa-university"></i></div>
+                <div class="info-box">
+                    <h3>Institutional Member</h3>
+                    <span class="fee-tag">Organizations</span>
+                    <p>Collaborative membership for Mutts, educational trusts, and socio-cultural institutions.</p>
+                </div>
+            </div>
+
+            <!-- 11. Honorary Member -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="500">
+                <div class="icon-box-refined"><i class="fas fa-award"></i></div>
+                <div class="info-box">
+                    <h3>Honorary Member</h3>
+                    <span class="fee-tag">By Invitation</span>
+                    <p>Conferred upon distinguished personalities for their extraordinary social impact and community service.</p>
+                </div>
+            </div>
+
+            <!-- 12. Student Member -->
+            <div class="member-card-horizontal" data-aos="fade-up" data-aos-delay="550">
+                <div class="icon-box-refined"><i class="fas fa-user-graduate"></i></div>
+                <div class="info-box">
+                    <h3>Student Member</h3>
+                    <span class="fee-tag">Youth Wing</span>
+                    <p>Academic membership for students to connect with heritage and professional guidance networks.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Simple Apply Button (Decent & Clean) -->
+        <div class="apply-footer-box section-padding text-center" data-aos="zoom-in">
+            <p>Are you ready to be a part of our legacy?</p>
+            <a href="{{ url_for('web.contact') }}" class="btn btn-primary btn-lg">Apply for Membership</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

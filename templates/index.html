@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}Akhila Bharata Veerashaiva Mahasabha (AIVMM) | Official Redesign{% endblock %}
+
+{% block content %}
+<!-- Hero Slider (Immersive) -->
+<section class="hero-slider">
+    <div class="slider-wrapper">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <div class="slide-bg">
+                <img src="{{ url_for('static', filename='img/gallery/g8.webp') }}" alt="Ancient Indian temple heritage" loading="lazy">
+            </div>
+            <div class="slide-content container">
+                <div class="text-reveal">
+                    <h2>Heritage of <span>Ancient Virtue</span></h2>
+                </div>
+                <p>Preserving the divine wisdom of Veerashaiva traditions to empower a globally progressive
+                    community.</p>
+                <div class="cta-group">
+                    <a href="{{ url_for('web.membership') }}" class="btn btn-primary">Join Community</a>
+                    <a href="{{ url_for('web.about') }}" class="btn btn-outline">Explore Heritage</a>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="slide-bg">
+                <img src="{{ url_for('static', filename='img/gallery/g9.webp') }}" alt="Community gathering and unity" loading="lazy">
+            </div>
+            <div class="slide-content container">
+                <div class="text-reveal">
+                    <h2>Unity in <span>Divine Devotion</span></h2>
+                </div>
+                <p>Building resilient networks through shared spiritual values and collective social
+                    empowerment.</p>
+                <div class="cta-group">
+                    <a href="{{ url_for('web.events') }}" class="btn btn-primary">Our Initiatives</a>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+            <div class="slide-bg">
+                <img src="{{ url_for('static', filename='img/gallery/g10.webp') }}" alt="Spiritual enlightenment and wisdom" loading="lazy">
+            </div>
+            <div class="slide-content container">
+                <div class="text-reveal">
+                    <h2>Path to <span>Enlightenment</span></h2>
+                </div>
+                <p>Promoting the timeless philosophical legacy and spiritual teachings of our revered ancestors.
+                </p>
+                <div class="cta-group">
+                    <a href="{{ url_for('web.mission') }}" class="btn btn-primary">Our Vision</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider Controls -->
+    <div class="slider-controls">
+        <button class="prev-slide" aria-label="Previous Slide">❮</button>
+        <div class="slider-dots"></div>
+        <button class="next-slide" aria-label="Next Slide">❯</button>
+    </div>
+</section>
+
+<!-- Mission Highlights -->
+<section class="highlights section-padding bg-cream">
+    <div class="container">
+        <div class="section-header text-center" data-aos>
+            <div class="badge" style="opacity: 1 !important; visibility: visible !important;">OUR MISSION</div>
+            <h2>Core Pillars of <span>Our Society</span></h2>
+            <p>Dedicated to the preservation and progress of the Veerashaiva Lingayath community.</p>
+        </div>
+        <div class="items-grid">
+            <div class="item-card section-fade" data-aos>
+                <div class="icon">🔱</div>
+                <h3>Cultural Preservation</h3>
+                <p>Maintaining the ancient traditions, Vachana literature, and core values of our community for
+                    future generations.</p>
+            </div>
+            <div class="item-card section-fade" data-aos>
+                <div class="icon">🤝</div>
+                <h3>Community Support</h3>
+                <p>Building inclusive networks for scholarship, healthcare, and economic growth among all our
+                    members.</p>
+            </div>
+            <div class="item-card section-fade" data-aos>
+                <div class="icon">✨</div>
+                <h3>Spiritual Growth</h3>
+                <p>Fostering the spiritual teachings of Basavanna and our ancestors to guide contemporary
+                    living.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Animated Counters Section (Our Community) -->
+<section class="stats section-padding community-parallax">
+    <div class="community-overlay"></div>
+    <div class="container" style="position:relative; z-index:2;">
+        <div class="section-header text-center" data-aos>
+            <div class="badge"
+                style="background: rgba(255,255,255,0.15); color:#fff; border: 1px solid rgba(255,255,255,0.4);">
+                AIVMM IMPACT</div>
+            <h2 style="color:#fff;">Our Community</h2>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem;">Building a stronger, more united, and globally progressive Veerashaiva Lingayath community.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item section-fade" data-aos>
+                <h3 class="counter" data-target="15000" style="color: #fff;">0</h3>
+                <p style="color: rgba(255,255,255,0.9);">Members Nationwide</p>
+            </div>
+            <div class="stat-item section-fade" data-aos>
+                <h3 class="counter" data-target="120" style="color: #fff;">0</h3>
+                <p style="color: rgba(255,255,255,0.9);">Years of Legacy</p>
+            </div>
+            <div class="stat-item section-fade" data-aos>
+                <h3 class="counter" data-target="500" style="color: #fff;">0</h3>
+                <p style="color: rgba(255,255,255,0.9);">Annual Events</p>
+            </div>
+            <div class="stat-item section-fade" data-aos>
+                <h3 class="counter" data-target="86" style="color: #fff;">0</h3>
+                <p style="color: rgba(255,255,255,0.9);">Distinguished Presidents</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision & Mission Section -->
+<section class="vision-mission-section section-padding">
+    <div class="container" style="position:relative; z-index:2;">
+        <div class="section-header text-center vm-header" data-aos>
+            <h2>Vision & Mission</h2>
+        </div>
+        <div class="vision-mission-grid">
+            <div class="vm-card vision-card" data-aos>
+                <h3>Our Vision Statement</h3>
+                <ul>
+                    <li><strong>Promote Heritage:</strong> Encourage and support research on Veerashaiva ancient
+                        traditions as potential solutions to societal challenges.</li>
+                    <li><strong>Combat Social Issues:</strong> Develop innovative strategies to tackle modern
+                        social resistance, using cultural principles as a key tool.</li>
+                    <li><strong>Foster Collaboration:</strong> Create a platform for collaboration among
+                        leaders, policymakers, and community stakeholders.</li>
+                    <li><strong>Disseminate Knowledge:</strong> Share knowledge and findings through
+                        conferences, publications, and educational programs.</li>
+                    <li><strong>Policy Advocacy:</strong> Advocate for policies and regulations that support
+                        community development.</li>
+                </ul>
+            </div>
+            <div class="vm-card mission-card" data-aos>
+                <h3>Our Core Mission</h3>
+                <ul>
+                    <li><strong>Global Leadership:</strong> Become a leading global organization in preserving
+                        cultural heritage.</li>
+                    <li><strong>Sustainable Solutions:</strong> Promote sustainable and effective social
+                        frameworks to reduce the burden on community resources.</li>
+                    <li><strong>Innovation and Development:</strong> Drive innovation in educational support and
+                        preventative community care measures.</li>
+                    <li><strong>Educational Impact:</strong> Enhance the global community’s understanding of our
+                        heritage and its role in modern development.</li>
+                    <li><strong>Collaborative Network:</strong> Build a robust international network working
+                        together to combat challenges through shared knowledge.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Leaders Sync Section -->
+<section class="section-padding our-leaders-section" style="background: var(--bg-color);">
+    <div class="container">
+        <div class="section-header text-center" data-aos>
+            <div class="badge">LEADERSHIP</div>
+            <h2>Our <span>Leaders</span></h2>
+            <p>Guiding the community with unwavering devotion and robust vision.</p>
+        </div>
+
+        <!-- Top Slider: 5 Leaders -->
+        <div class="leaders-slider-container" data-aos>
+            <button class="slider-btn prev-leader-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="leaders-slider-track-wrap">
+                <div class="leaders-slider-track" id="leadersTrack">
+                    <div class="leader-card active" data-leader-index="0">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p1.webp') }}" alt="Leader 1">
+                        <h4>Sri B.S. Yediyurappa</h4>
+                        <span>Chief Patron</span>
+                    </div>
+                    <div class="leader-card" data-leader-index="1">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p2.webp') }}" alt="Leader 2">
+                        <h4>Sri Basavaraj Bommai</h4>
+                        <span>Co-Patron</span>
+                    </div>
+                    <div class="leader-card" data-leader-index="2">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p3.webp') }}" alt="Leader 3">
+                        <h4>Sri Jagadish Shettar</h4>
+                        <span>Senior Advisor</span>
+                    </div>
+                    <div class="leader-card" data-leader-index="4">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p4.webp') }}" alt="Leader 4">
+                        <h4>Dr. S. S. Badrinath</h4>
+                        <span>Honorary President</span>
+                    </div>
+                    <div class="leader-card" data-leader-index="4">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p5.webp') }}" alt="Leader 5">
+                        <h4>Sri V. Somanna</h4>
+                        <span>Executive Member</span>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-btn next-leader-btn"><i class="fas fa-chevron-right"></i></button>
+
+            <!-- Slider Dots -->
+            <div class="leader-dots" id="leaderDots"></div>
+        </div>
+
+        <!-- Bottom Row: Office Bearers (Synced) -->
+        <div class="office-bearers-container" data-aos>
+            <h3 class="text-center ob-title">Office Bearers</h3>
+
+            <!-- Dynamic Grid 8 members loaded via JS -->
+            <div class="office-bearers-grid" id="officeBearersGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Premium Mosaic Achievements Section -->
+<section class="section-padding achievements-staggered">
+    <div class="container">
+        <div class="section-header text-center" data-aos>
+            <div class="badge">LEGACY & GLORY</div>
+            <h2>Celebrating Our <span>Achievements</span></h2>
+            <p>Honoring the milestones and distinguished contributions that define our global excellence.</p>
+        </div>
+
+        <div class="mosaic-container">
+            <!-- Achievement 1: Cultural Preservation -->
+            <div class="mosaic-item" data-aos="fade-right">
+                <div class="mosaic-media">
+                    <div class="image-offset-frame">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g1.webp') }}" alt="Cultural Preservation Award">
+                    </div>
+                </div>
+                <div class="mosaic-content">
+                    <span class="mosaic-year">2025</span>
+                    <h3>Excellence in Cultural Preservation</h3>
+                    <p>The AIVMM was honored with a National Award for its groundbreaking work in the
+                        digitisation and worldwide conservation of the 12th-century philosophical Vachanas.</p>
+                    <a href="{{ url_for('web.news') }}" class="btn btn-outline">Read More</a>
+                </div>
+            </div>
+
+            <!-- Achievement 2: Athletic Excellence -->
+            <div class="mosaic-item reverse" data-aos="fade-left">
+                <div class="mosaic-media">
+                    <div class="image-offset-frame">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g2.webp') }}"
+                            alt="National Handball Tournament Triumph">
+                    </div>
+                </div>
+                <div class="mosaic-content">
+                    <span class="mosaic-year">2024</span>
+                    <h3>National Handball Tournament Triumph</h3>
+                    <p>Our youth athletic wing demonstrated exceptional skill and spirit, securing the
+                        first-place championship trophy in the All-India Inter-State Handball Tournament.</p>
+                    <a href="{{ url_for('web.news') }}" class="btn btn-outline">View Winners</a>
+                </div>
+            </div>
+
+            <!-- Achievement 3: Educational Impact -->
+            <div class="mosaic-item" data-aos="fade-right">
+                <div class="mosaic-media">
+                    <div class="image-offset-frame">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/gallery/g3.webp') }}" alt="Scholarship Milestone">
+                    </div>
+                </div>
+                <div class="mosaic-content">
+                    <span class="mosaic-year">2023</span>
+                    <h3>Global Scholarship Milestone</h3>
+                    <p>Successfully achieved our goal of funding 5,000 community scholars, providing them with
+                        the resources to pursue higher education globally.</p>
+                    <a href="{{ url_for('web.news') }}" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 80px;">
+            <a href="{{ url_for('web.news') }}" class="btn btn-primary">Explore All Milestones</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

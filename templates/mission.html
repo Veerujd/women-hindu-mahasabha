@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Our Mission & Objectives | AIVMM{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>Mission</span>
+        </nav>
+        <h2 data-aos>Mission & Objectives</h2>
+        <p data-aos>Dedicated to the service of the Veerashaiva Lingayath community through education, culture, and unity.</p>
+    </div>
+</section>
+
+<!-- Mission & Vision Details -->
+<section class="section-padding">
+    <div class="container grid-2 section-fade" data-aos>
+        <div class="content-box" data-aos>
+            <div class="badge">OUR VISION</div>
+            <h3>A United and Progressive Community</h3>
+            <p>To establish a global network of empowered Veerashaiva Lingayaths who are rooted in their spiritual heritage while leading in professional, social, and economic spheres.</p>
+            <ul class="mission-list">
+                <li>Cultural Excellence</li>
+                <li>Universal Unity</li>
+                <li>Ethical Leadership</li>
+            </ul>
+        </div>
+        <div class="content-box" data-aos>
+            <div class="badge">OUR MISSION</div>
+            <h3>Empowering Generations through Heritage</h3>
+            <p>To provide sustainable support systems for education, preserve ancient spiritual teachings (Vachanas), and build infrastructure that fosters community growth and social harmony.</p>
+            <ul class="mission-list">
+                <li>Educational Support</li>
+                <li>Spiritual Awareness</li>
+                <li>Social Justice</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Core Objectives -->
+<section class="section-padding bg-cream">
+    <div class="container section-fade" data-aos>
+        <h2 class="text-center" style="margin-bottom: 50px;">Core Objectives</h2>
+        <div class="items-grid">
+            <div class="item-card" data-aos>
+                <div class="icon">📚</div>
+                <h3>Educational Welfare</h3>
+                <p>Establishing scholarship funds and educational institutions to support bright minds from our community.</p>
+            </div>
+            <div class="item-card" data-aos>
+                <div class="icon">🏛️</div>
+                <h3>Cultural Heritage</h3>
+                <p>Documenting and preserving the 12th-century Vachana literature and the teachings of Lord Basavanna.</p>
+            </div>
+            <div class="item-card" data-aos>
+                <div class="icon">🌍</div>
+                <h3>Social Unity</h3>
+                <p>Creating a platform for Veerashaivas worldwide to connect, collaborate, and support each other.</p>
+            </div>
+            <div class="item-card" data-aos>
+                <div class="icon">⚖️</div>
+                <h3>Legal & Civic Rights</h3>
+                <p>Protecting the rights and interests of the community at the state and national levels.</p>
+            </div>
+            <div class="item-card" data-aos>
+                <div class="icon">🏥</div>
+                <h3>Medical & Social Services</h3>
+                <p>Providing healthcare support and organizing blood donation camps and social welfare activities.</p>
+            </div>
+            <div class="item-card" data-aos>
+                <div class="icon">💎</div>
+                <h3>Economic Development</h3>
+                <p>Encouraging entrepreneurship and providing vocational training to empower the youth economically.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

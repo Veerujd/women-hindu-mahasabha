@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login | AIVMM{% endblock %}
+
+{% block content %}
+<section class="section-padding" style="min-height: 80vh; display: flex; align-items: center;">
+    <div class="container">
+        <div class="form-container" style="max-width: 500px; margin: 0 auto;" data-aos="zoom-in">
+            <form class="spiritual-form" style="padding: 40px;">
+                <div class="text-center" style="margin-bottom: 30px;">
+                    <i class="fas fa-user-shield" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    <h2 style="margin-top: 15px;">Admin Gateway</h2>
+                    <p style="opacity: 0.7;">Secure access for authorized personnel only.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-user">Username</label>
+                    <input type="text" id="admin-user" name="username" required placeholder="Authorized ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-pass">Secret Key</label>
+                    <input type="password" id="admin-pass" name="password" required placeholder="••••••••">
+                </div>
+                
+                <div class="form-footer" style="margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary w-100">Authenticate Access</button>
+                </div>
+                
+                <div class="text-center" style="margin-top: 30px; font-size: 0.85rem; opacity: 0.6;">
+                    <p><i class="fas fa-info-circle"></i> This system is monitored. Unauthorized attempts will be logged.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

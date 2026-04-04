@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}News & Awards | AIVMM{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>News & Awards</span>
+        </nav>
+        <h2 data-aos>News & Awards</h2>
+        <p data-aos>Sharing stories of triumph, recognition, and progress from across the global Veerashaiva community.</p>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="events-grid">
+            <!-- News 1 -->
+            <div class="event-card" data-aos>
+                <div class="event-img">
+                    <img src="{{ url_for('static', filename='img/gallery/g1.webp') }}" alt="National Handball Tournament Success" loading="lazy">
+                </div>
+                <div class="event-body">
+                    <span class="badge">MARCH 2026</span>
+                    <h3>National Handball Tournament Success</h3>
+                    <p>Our champions brought home the gold in the recent national tournament, showcasing the athletic talent within our community.</p>
+                    <a href="#" class="btn-text">Read More →</a>
+                </div>
+            </div>
+            <!-- News 2 -->
+            <div class="event-card" data-aos>
+                <div class="event-img">
+                    <img src="{{ url_for('static', filename='img/gallery/g2.webp') }}" alt="Excellence in Cultural Preservation" loading="lazy">
+                </div>
+                <div class="event-body">
+                    <span class="badge">FEB 2026</span>
+                    <h3>Excellence in Cultural Preservation</h3>
+                    <p>The Mahasabha was honored for its unwavering commitment to preserving the Vachana literature through digital archiving.</p>
+                    <a href="#" class="btn-text">Read More →</a>
+                </div>
+            </div>
+            <!-- News 3 -->
+            <div class="event-card" data-aos>
+                <div class="event-img">
+                    <img src="{{ url_for('static', filename='img/gallery/g3.webp') }}" alt="Community Impact Award" loading="lazy">
+                </div>
+                <div class="event-body">
+                    <span class="badge">JAN 2026</span>
+                    <h3>Community Impact Award</h3>
+                    <p>Recognizing the social service initiatives and educational scholarships that have impacted thousands of families.</p>
+                    <a href="#" class="btn-text">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

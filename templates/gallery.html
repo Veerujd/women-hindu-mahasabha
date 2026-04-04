@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery | Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>Gallery</span>
+        </nav>
+        <h2 data-aos>Moments of Legacy</h2>
+        <p data-aos>A visual records of our journey, cultural celebrations, and community initiatives.</p>
+    </div>
+</section>
+
+<!-- Gallery Tabs Section -->
+<section class="section-padding" style="padding-bottom: 0;">
+    <div class="container">
+        <div class="gallery-tabs" data-aos>
+            <button class="tab-btn active" data-category="all">All Moments</button>
+            <button class="tab-btn" data-category="events">Events</button>
+            <button class="tab-btn" data-category="heritage">Heritage</button>
+            <button class="tab-btn" data-category="community">Community</button>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="section-padding">
+    <div class="container">
+        <div class="gallery-grid" id="main-gallery">
+            <div class="gallery-item heritage" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g1.webp') }}" alt="Historical Bhavan" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Veerashaiva Bhavan</h4>
+                    <p>Our historical landmark established in Bangalore.</p>
+                </div>
+            </div>
+            <div class="gallery-item events" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g2.webp') }}" alt="Cultural Event" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Spiritual Discourse</h4>
+                    <p>Ancient wisdom for modern times.</p>
+                </div>
+            </div>
+            <div class="gallery-item community" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g3.webp') }}" alt="Community Meeting" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Executive Committee</h4>
+                    <p>Leading the path to community empowerment.</p>
+                </div>
+            </div>
+            <div class="gallery-item community" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g4.webp') }}" alt="Educational Support" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Scholarship Awards</h4>
+                    <p>Supporting our future leaders.</p>
+                </div>
+            </div>
+            <div class="gallery-item events" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g5.webp') }}" alt="Festival Celebration" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Basava Jayanti 2025</h4>
+                    <p>Cultural splendor and devotion.</p>
+                </div>
+            </div>
+            <div class="gallery-item heritage" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g6.webp') }}" alt="Temple Architecture" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Historical Architecture</h4>
+                    <p>The intricate legacy of our ancestors.</p>
+                </div>
+            </div>
+            <div class="gallery-item events" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g7.webp') }}" alt="Group Prayer" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Mass Prayer Session</h4>
+                    <p>Unity in devotion and peaceful coexistence.</p>
+                </div>
+            </div>
+            <div class="gallery-item events" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g8.webp') }}" alt="Music Festival" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Cultural Music Fest</h4>
+                    <p>Celebrating our musical heritage through live performances.</p>
+                </div>
+            </div>
+            <div class="gallery-item heritage" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g9.webp') }}" alt="Vachana Manuscripts" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Vachana Scriptures</h4>
+                    <p>Digital archiving of 12th century literature.</p>
+                </div>
+            </div>
+            <div class="gallery-item heritage" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g10.webp') }}" alt="Heritage Site" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Heritage Site</h4>
+                    <p>Preserving our sacred sites for generations.</p>
+                </div>
+            </div>
+            <div class="gallery-item events" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g11.webp') }}" alt="Community Event" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Community Event</h4>
+                    <p>Gathering to celebrate our cultural roots.</p>
+                </div>
+            </div>
+            <div class="gallery-item community" data-aos>
+                <img src="{{ url_for('static', filename='img/gallery/g12.webp') }}" alt="Leadership meeting" loading="lazy">
+                <div class="gallery-overlay">
+                    <h4>Leadership meeting</h4>
+                    <p>Crafting vision for the Mahasabha.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="lightbox multi-slider-lightbox" id="lightbox">
+    <span class="close-lightbox" id="close-lightbox">&times;</span>
+    <div class="lightbox-content">
+        <div class="lb-slider-container">
+            <button class="lb-nav-btn lb-prev" id="lb-prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="lb-track-wrapper">
+                <div class="lb-track" id="lb-track">
+                    <!-- Example slider images will be injected via JS -->
+                </div>
+            </div>
+            <button class="lb-nav-btn lb-next" id="lb-next"><i class="fas fa-chevron-right"></i></button>
+            <div class="lb-dots" id="lb-dots"></div>
+        </div>
+        <div class="lightbox-caption" id="lightbox-caption">
+            <h4 id="lightbox-title"></h4>
+            <p id="lightbox-desc"></p>
+            <div class="lb-extra-info" id="lb-extra-info">This is an example event gallery. You can swipe or click through the collection of images above to relive these unforgettable historical moments.</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

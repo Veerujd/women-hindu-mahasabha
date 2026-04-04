@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block title %}Officials | Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}
+
+{% block content %}
+<!-- Page Hero (SYNCED WITH ABOUT PAGE) -->
+<section class="page-hero section-padding">
+    <div class="container" data-aos="fade-up">
+        <nav class="breadcrumbs" data-aos="fade-down">
+            <a href="{{ url_for('web.index') }}">Home</a> / <span>Our Officials</span>
+        </nav>
+        <h2 data-aos="fade-up">Leadership & Officials</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Guiding the Akhila Bharata Veerashaiva Mahasabha with vision and devotion.</p>
+    </div>
+</section>
+
+<!-- Filter System -->
+<section class="filter-section section-padding-sm">
+    <div class="container">
+        <div class="filter-card shadow-lg" data-aos="fade-up">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Select State</label>
+                    <select id="stateFilter" class="form-select">
+                        <option value="">Select State (All)</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="TamilNadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label><i class="fas fa-city"></i> Select District</label>
+                    <select id="districtFilter" class="form-select" disabled>
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label><i class="fas fa-landmark"></i> Select Taluk</label>
+                    <select id="talukFilter" class="form-select" disabled>
+                        <option value="">Select Taluk</option>
+                    </select>
+                </div>
+                <div class="filter-group action-group">
+                    <button id="searchBtn" class="btn btn-primary w-100"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+            <div id="filterMessage" class="filter-message"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content Section -->
+<div class="section-padding-sm">
+    <div class="container">
+        
+        <!-- Leaders Section -->
+        <div class="officials-category" data-aos="fade-up">
+            <h2 class="category-title">Leaders of Veerashaiva Mahasabha</h2>
+            <div class="officials-grid central">
+                <div class="official-card featured" data-aos="zoom-in">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/presidents/p20.webp') }}" alt="Dr. Shamanur Shivashankarappa">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge president">President</div>
+                        <h3>Dr. Shamanur Shivashankarappa</h3>
+                        <span class="official-region">Karnataka, India</span>
+                        <p class="official-msg">Visionary leader championing industry, health, and academic excellence within the Veerashaiva community for decades.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Secretary General Section -->
+        <div class="officials-category" data-aos="fade-up">
+            <h2 class="category-title">Secretary General</h2>
+            <div class="officials-grid central">
+                <div class="official-card secondary" data-aos="zoom-in">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/eshwar-kandre.webp') }}" alt="Shri Eshwar Khandre">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge sec-gen">Secretary General</div>
+                        <h3>Shri Eshwar Khandre</h3>
+                        <span class="official-region">Karnataka, India</span>
+                        <p class="official-msg">Leading administrative initiatives and organizational reforms to empower every member of our global community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vice Presidents Section -->
+        <div class="officials-category" data-aos="fade-up">
+            <h2 class="category-title">Vice-Presidents</h2>
+            <div class="officials-grid">
+                <!-- Vice Presidents List -->
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/prabhakar-kore.webp') }}" alt="Prabhakar Kore">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Prabhakar Kore</h3>
+                        <span class="official-region">Belagavi, Karnataka</span>
+                        <p class="official-msg">Advancing educational standards and institutional development across standard regions.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/as-veeranna.webp') }}" alt="A.S. Veeranna">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>A.S. Veeranna</h3>
+                        <span class="official-region">Davangere, Karnataka</span>
+                        <p class="official-msg">Dedicated to social welfare and community housing project coordination.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/guramma-siddareddy.webp') }}" alt="Guramma Siddareddy">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Guramma Siddareddy</h3>
+                        <span class="official-region">Ballari, Karnataka</span>
+                        <p class="official-msg">Empowering women through vocational training and localized community networks.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/anaberu-rajanna.webp') }}" alt="Anaberu Rajanna">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Anaberu Rajanna</h3>
+                        <span class="official-region">Davangere, Karnataka</span>
+                        <p class="official-msg">Focusing on youth leadership programs and cultural preservation initiatives.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/baburao-thumba.webp') }}" alt="Baburao Thumba">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Baburao Thumba</h3>
+                        <span class="official-region">Bidar, Karnataka</span>
+                        <p class="official-msg">Strengthening regional chapters and logistical support systems for the Mahasabha.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/shankar-bidari.webp') }}" alt="Shankar Bidari">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Shankar Bidari</h3>
+                        <span class="official-region">Bangalore, Karnataka</span>
+                        <p class="official-msg">Providing strategic oversight for legal and institutional security matters.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/venkataraddy-mudnal.webp') }}" alt="Venkataraddy Mudnal">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Venkataraddy Mudnal</h3>
+                        <span class="official-region">Yadgir, Karnataka</span>
+                        <p class="official-msg">Leading agricultural literacy and rural development programs for community farmers.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/sachidananda-murthy.webp') }}" alt="B.S. Sachidananda Murthy">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>B.S. Sachidananda Murthy</h3>
+                        <span class="official-region">Bangalore, Karnataka</span>
+                        <p class="official-msg">Coordinating spiritual events and literature publication for global distribution.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/veeranna-charanthimath.webp') }}" alt="Veeranna Charanthimath">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Veeranna Charanthimath</h3>
+                        <span class="official-region">Bagalkot, Karnataka</span>
+                        <p class="official-msg">Promoting health awareness and affordable medical insurance for members.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/ss-ganesh.webp') }}" alt="S.S. Ganesh">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>S.S. Ganesh</h3>
+                        <span class="official-region">Bangalore, Karnataka</span>
+                        <p class="official-msg">Driving digital transformation and online membership reach for the next generation.</p>
+                    </div>
+                </div>
+                <div class="official-card" data-aos="fade-up">
+                    <div class="card-img-wrapper">
+                        <img src="{{ url_for('static', filename='img/images/geetha-mahadevaprasad.webp') }}" alt="Geetha Mahadevaprasad">
+                    </div>
+                    <div class="card-info-content">
+                        <div class="official-badge vp">Vice-President</div>
+                        <h3>Geetha Mahadevaprasad</h3>
+                        <span class="official-region">Chamarajanagar, Karnataka</span>
+                        <p class="official-msg">Preserving traditional values while adapting to evolving social needs of the community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const officialFilterData = {
+        "Karnataka": {
+            "Bangalore Urban": ["Bangalore North", "Bangalore South", "Bangalore East", "Anekal"],
+            "Bangalore Rural": ["Doddaballapur", "Devanahalli", "Hosakote", "Nelamangala"],
+            "Belagavi": ["Belagavi", "Athani", "Bailhongal", "Chikkodi", "Gokak"],
+            "Dharwad": ["Dharwad", "Hubli", "Kalghatgi", "Kundgol", "Navalgund"],
+            "Mysuru": ["Mysuru", "Hunsur", "Nanjangud", "Peryapatna", "T.Narasipura"],
+            "Tumakuru": ["Tumakuru", "Gubbi", "Kunigal", "Madhuagiri", "Sira"]
+        },
+        "Kerala": {
+            "Thiruvananthapuram": ["Neyyattinkara", "Kattakada", "Nedumangad", "Thiruvananthapuram"],
+            "Kollam": ["Kollam", "Kunnathur", "Karunagappally", "Sasthamkotta"],
+            "Ernakulam": ["Aluva", "Kochi", "Kunnathunad", "Muvattupuzha"]
+        },
+        "TamilNadu": {
+            "Chennai": ["Chennai North", "Chennai Central", "Chennai South"],
+            "Coimbatore": ["Coimbatore North", "Coimbatore South", "Pollachi", "Mettupalayam"],
+            "Madurai": ["Madurai North", "Madurai South", "Melur", "Vadipatti"]
+        },
+        "Telangana": {
+            "Hyderabad": ["Hyderabad Central", "Secunderabad", "Charminar"],
+            "Rangareddy": ["Rajendranagar", "Serilingampally", "Ibrahimpatnam"],
+            "Medchal": ["Malkajgiri", "Medchal", "Uppal", "Kukatpally"]
+        }
+    };
+
+    const stateSelect = document.getElementById('stateFilter');
+    const districtSelect = document.getElementById('districtFilter');
+    const talukSelect = document.getElementById('talukFilter');
+    const filterMessage = document.getElementById('filterMessage');
+
+    stateSelect.addEventListener('change', function() {
+        const state = this.value;
+        districtSelect.innerHTML = '<option value="">Select District</option>';
+        talukSelect.innerHTML = '<option value="">Select Taluk</option>';
+        talukSelect.disabled = true;
+
+        if (state && officialFilterData[state]) {
+            districtSelect.disabled = false;
+            Object.keys(officialFilterData[state]).forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+        } else {
+            districtSelect.disabled = true;
+        }
+    });
+
+    districtSelect.addEventListener('change', function() {
+        const state = stateSelect.value;
+        const district = this.value;
+        talukSelect.innerHTML = '<option value="">Select Taluk</option>';
+
+        if (state && district && officialFilterData[state][district]) {
+            talukSelect.disabled = false;
+            officialFilterData[state][district].forEach(taluk => {
+                const option = document.createElement('option');
+                option.value = taluk;
+                option.textContent = taluk;
+                talukSelect.appendChild(option);
+            });
+        } else {
+            talukSelect.disabled = true;
+        }
+    });
+
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        const state = stateSelect.value;
+        const district = districtSelect.value;
+        const taluk = talukSelect.value;
+        
+        let msg = "Showing results for: ";
+        if(!state) msg = "Showing all National & State level officials.";
+        else msg += `**${state}**`;
+        
+        if(district) msg += ` > **${district}**`;
+        if(taluk) msg += ` > **${taluk}**`;
+
+        filterMessage.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`;
+        filterMessage.style.display = 'block';
+
+        // Visual feedback for search
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+        this.style.opacity = '0.7';
+        
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-search"></i> Search';
+            this.style.opacity = '1';
+            // AOS refresh to trigger animations on filtered content if any
+            if(window.AOS) AOS.refresh();
+        }, 800);
+    });
+</script>
+{% endblock %}

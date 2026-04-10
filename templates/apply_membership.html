@@ -221,19 +221,6 @@
     <div class="form-card" data-aos="fade-up">
         <form id="membershipForm" novalidate>
             
-            <!-- TYPE SELECTION -->
-            <div class="type-selector-wrapper">
-                <div class="field-group">
-                    <label>Select Membership Category <span class="required-mark">*</span></label>
-                    <select id="userType" class="form-control" required>
-                        <option value="">-- Choose Category --</option>
-                        <option value="student">Student</option>
-                        <option value="professional">Professional</option>
-                        <option value="business">Business</option>
-                        <option value="self_employed">Self Employed</option>
-                    </select>
-                </div>
-            </div>
 
             <!-- COMMON FIELDS -->
             <div class="section-box">
@@ -358,6 +345,20 @@
                 </div>
             </div>
 
+            <!-- VOCATION SELECTION -->
+            <div class="field-group full-width" style="margin-top: 25px; margin-bottom: 25px; background: #fdfaf6; padding: 25px; border-radius: 16px; border: 1px dashed var(--primary-color);">
+                <label style="font-size: 1.1rem; margin-bottom: 15px;">Employment Status (Triggers additional fields) <span class="required-mark">*</span></label>
+                <select id="userType" class="form-control">
+                    <option value="">-- Choose Status --</option>
+                    <option value="student">Student</option>
+                    <option value="professional">Professional</option>
+                    <option value="business">Business</option>
+                    <option value="self_employed">Self Employed</option>
+                </select>
+            </div>
+
+
+
             <!-- TYPE-SPECIFIC SECTIONS -->
             <div id="vocationContainer">
                 <!-- STUDENT -->
@@ -454,6 +455,37 @@
                 </div>
             </div>
 
+            <!-- MEMBERSHIP TIER SELECTION -->
+            <div class="type-selector-wrapper" style="margin-top: 40px;">
+                <div class="field-group">
+                    <label>Select Membership Tier <span class="required-mark">*</span></label>
+                    <select id="membershipTier" class="form-control" required>
+                        <option value="">-- Choose Tier --</option>
+                        <option value="paramadasohi">Paramadasohi (₹ 1,00,000/-)</option>
+                        <option value="mahadasohi">Mahadasohi (₹ 50,000/-)</option>
+                        <option value="dasohi">Dasohi (₹ 25,000/-)</option>
+                        <option value="danashiromani">Danashiromani (₹ 10,000/-)</option>
+                        <option value="mahadani">Mahadani (₹ 5,000/-)</option>
+                        <option value="dani">Dani (₹ 2,500/-)</option>
+                        <option value="upaposhaka">Upaposhaka (₹ 1,000/-)</option>
+                        <option value="ashrayadatha">Ashrayadatha (₹ 500/-)</option>
+                        <option value="life_member">Life Member (₹ 1,000/-)</option>
+                        <option value="institutional">Institutional / Organizations</option>
+                        <option value="honorary">Honorary (Invitation Only)</option>
+                        <option value="student">Student / Youth Wing</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- DYNAMIC FEE SUMMARY -->
+            <div id="feeDisplay" style="display: none; background: #fdfaf6; border: 1px dashed var(--primary-color); padding: 25px; border-radius: 16px; margin-top: 30px; text-align: center; box-shadow: 0 10px 20px rgba(255, 153, 51, 0.05);">
+                <h4 style="color: var(--secondary-color); margin: 0 0 15px 0; font-size: 1.3rem; font-family: var(--font-heading);">Membership Fee Summary</h4>
+                <div style="font-size: 1.1rem; color: #4b5563;">
+                    <div style="margin-bottom: 5px;">Selected Category: <strong id="summaryCategory" style="color: var(--primary-color);"></strong></div>
+                    <div>Amount Payable: <strong id="summaryAmount" style="font-size: 1.5rem; color: #10b981;"></strong></div>
+                </div>
+            </div>
+
             <div class="submit-area">
                 <button type="submit" class="btn-apply">
                     <span>Submit Membership Application</span>
@@ -465,6 +497,16 @@
             </div>
 
         </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div id="apply-success-modal" class="modal">
+    <div class="modal-content" style="text-align: center; max-width: 480px; padding: 40px; border-radius: 20px;">
+        <div class="success-icon" style="animation: bounce 1s infinite;"><i class="fas fa-check-circle" style="font-size: 70px; color: #10B981; margin-bottom: 20px;"></i></div>
+        <h3 style="color: var(--secondary-color); font-family: var(--font-heading); margin-bottom: 15px;">Application Submitted!</h3>
+        <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.05rem;">Thank you for registering. Your membership application has been successfully submitted and is under review.</p>
+        <button class="btn btn-primary close-modal" style="width: 100%; border-radius: 50px;">Return to Home</button>
     </div>
 </div>
 {% endblock %}
@@ -499,11 +541,11 @@
             }
         };
 
-        // Handle Type Change
+        // Handle Vocation Change (Student, Business, etc.)
         typeSelect.addEventListener('change', (e) => {
             const val = e.target.value;
             
-            // Hide all
+            // Hide all vocation sections
             vocationSections.forEach(s => s.classList.remove('active'));
 
             if (val) {
@@ -517,6 +559,52 @@
                 updateRequiredFields(null);
             }
         });
+
+        // Handle Membership Tier Change for Fee Display
+        const tierSelect = document.getElementById('membershipTier');
+        const feesList = {
+            'paramadasohi': { label: 'Paramadasohi', amount: '₹ 1,00,000/-' },
+            'mahadasohi': { label: 'Mahadasohi', amount: '₹ 50,000/-' },
+            'dasohi': { label: 'Dasohi', amount: '₹ 25,000/-' },
+            'danashiromani': { label: 'Danashiromani', amount: '₹ 10,000/-' },
+            'mahadani': { label: 'Mahadani', amount: '₹ 5,000/-' },
+            'dani': { label: 'Dani', amount: '₹ 2,500/-' },
+            'upaposhaka': { label: 'Upaposhaka', amount: '₹ 1,000/-' },
+            'ashrayadatha': { label: 'Ashrayadatha', amount: '₹ 500/-' },
+            'life_member': { label: 'Life Member', amount: '₹ 1,000/-' },
+            'institutional': { label: 'Institutional / Organizations', amount: 'Variable / Contact Admin' },
+            'honorary': { label: 'Honorary', amount: 'Invitation Only' },
+            'student': { label: 'Student / Youth Wing', amount: 'Special Category' }
+        };
+        const feeDisplay = document.getElementById('feeDisplay');
+        const summaryCategory = document.getElementById('summaryCategory');
+        const summaryAmount = document.getElementById('summaryAmount');
+
+        tierSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val && feesList[val]) {
+                const details = feesList[val];
+                summaryCategory.textContent = details.label;
+                summaryAmount.textContent = details.amount;
+                feeDisplay.style.display = 'block';
+                feeDisplay.style.animation = 'slideDown 0.4s ease-out';
+            } else {
+                feeDisplay.style.display = 'none';
+            }
+        });
+
+        // Auto-select from URL Parameter (Linking membership.html logic)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tierParam = urlParams.get('tier');
+        if (tierParam) {
+            const options = Array.from(tierSelect.options);
+            const exists = options.some(opt => opt.value === tierParam);
+            if (exists) {
+                tierSelect.value = tierParam;
+                // Trigger change event to display fee properly automatically
+                tierSelect.dispatchEvent(new Event('change'));
+            }
+        }
 
         // Validation Logic
         const validateEmail = (email) => {
@@ -601,12 +689,21 @@
 
                 // Mocking API call
                 setTimeout(() => {
-                    alert('Success! Your membership application has been submitted successfully. We will review your details and get back to you soon.');
+                    const modal = document.getElementById('apply-success-modal');
+                    const closeBtn = modal.querySelector('.close-modal');
+                    
+                    modal.classList.add('active');
+                    
+                    closeBtn.addEventListener('click', () => {
+                        modal.classList.remove('active');
+                        window.location.href = '/';
+                    });
+                    
                     form.reset();
                     vocationSections.forEach(s => s.classList.remove('active'));
+                    feeDisplay.style.display = 'none';
                     btn.disabled = false;
                     btn.innerHTML = '<span>Submit Membership Application</span><i class="fas fa-arrow-right"></i>';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 1500);
             } else {
                 // Focus first error

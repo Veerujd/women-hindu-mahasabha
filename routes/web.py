@@ -46,6 +46,16 @@ def presidents():
 def apply_membership():
     return render_template('apply_membership.html', active_page='membership')
 
+@web_bp.route('/api/save_draft', methods=['POST'])
+def save_draft():
+    # Placeholder for saving draft to database
+    return {"status": "success", "message": "Draft saved successfully"}
+
+@web_bp.route('/api/submit_membership', methods=['POST'])
+def submit_membership():
+    # Placeholder for final submission logic
+    return {"status": "success", "message": "Membership application submitted successfully"}
+
 @web_bp.route('/admin-login')
 def admin_login():
     return render_template('admin_login.html', active_page='home')

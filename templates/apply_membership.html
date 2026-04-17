@@ -2,6 +2,11 @@
 
 {% block title %}Apply for Membership | Akhila Bharata Veerashaiva Mahasabha{% endblock %}
 
+{% block extra_head %}
+<!-- PDF Generation Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+{% endblock %}
+
 {% block extra_css %}
 <style>
     :root {
@@ -16,7 +21,8 @@
     .membership-container {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 30px 20px;
+        font-size: 0.95rem;
     }
 
     .form-card {
@@ -90,37 +96,49 @@
 
     /* Form Header */
     .form-doc-header {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
         border-bottom: 3px double #1f2937;
         padding-bottom: 20px;
         margin-bottom: 30px;
     }
+    .header-logo {
+        flex: 0 0 auto;
+        padding-right: 20px;
+    }
+    .header-logo img {
+        width: 110px;
+        height: auto;
+    }
+    .header-content {
+        flex: 1 1 auto;
+        text-align: center;
+    }
     .maintitle {
         font-family: var(--font-heading, 'Inter', sans-serif);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: 800;
         color: #1f2937;
         margin-bottom: 5px;
     }
     .subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem;
         color: #4b5563;
         margin-bottom: 10px;
     }
     .form-doc-title {
         display: inline-block;
         border: 2px solid #1f2937;
-        padding: 5px 20px;
-        font-size: 1.4rem;
+        padding: 4px 18px;
+        font-size: 1.2rem;
         font-weight: 800;
-        margin-top: 15px;
+        margin-top: 10px;
     }
 
     .top-meta {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
-        align-items: flex-start;
+        /* Deprecated in favor of top-section-layout */
+        display: none;
     }
 
     .meta-box {
@@ -157,7 +175,6 @@
         font-size: 0.9rem;
         background: #fdfdfd;
         position: relative;
-        cursor: pointer;
         overflow: hidden;
     }
     .photo-box img {
@@ -168,13 +185,6 @@
         top: 0;
         left: 0;
         display: none;
-    }
-    .photo-box input[type="file"] {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
     }
 
     .declaration {
@@ -197,7 +207,29 @@
         border: 1px solid var(--form-border);
         border-bottom: none;
     }
-    
+
+    /* Top Section Grid Layout */
+    .top-section-layout {
+        display: grid;
+        grid-template-areas: 
+            "meta photo"
+            "decl photo";
+        grid-template-columns: 1fr auto;
+        gap: 20px;
+        margin-bottom: 30px;
+        align-items: start;
+    }
+    .meta-box { grid-area: meta; }
+    .declaration { grid-area: decl; margin-bottom: 0; }
+    .photo-capture-area { 
+        grid-area: photo; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: start; 
+        position: relative;
+    }
+
     .grid-row {
         display: contents;
     }
@@ -214,6 +246,7 @@
         border-right: 1px solid var(--form-border);
         display: flex;
         align-items: center;
+        font-size: 0.9rem;
     }
     
     .grid-input {
@@ -224,10 +257,10 @@
         width: 100%;
         border: 1px solid #cbd5e1;
         border-radius: 6px;
-        padding: 12px 16px;
+        padding: 10px 14px;
         outline: none;
         font-family: inherit;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         background: #fdfdfd;
         color: #1f2937;
         transition: all 0.3s ease;
@@ -406,10 +439,10 @@
     .btn-apply {
         background: linear-gradient(135deg, var(--primary-color, #f97316), #ea580c);
         color: white;
-        padding: 16px 50px;
+        padding: 10px 25px;
         border-radius: 50px;
-        font-weight: 800;
-        font-size: 1.1rem;
+        font-weight: 700;
+        font-size: 0.9rem;
         border: none;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -421,52 +454,264 @@
     }
 
     @media (max-width: 900px) {
-        .form-grid-table {
-            grid-template-columns: 1fr;
-        }
-        .grid-label {
-            border-right: none;
-            border-bottom: none;
-            padding-bottom: 5px;
-            background: #e2e8f0;
-        }
-        .grid-input {
-            padding-top: 10px;
-            border-top: none;
-        }
-        .electoral-grid {
-            grid-template-columns: 1fr 1fr;
+        .membership-container {
+            padding: 10px 5px !important;
+            font-size: 0.8rem !important;
         }
         .form-card {
-            padding: 25px;
+            padding: 12px !important;
+            margin: 0 !important;
+            border-width: 1px !important;
         }
+        .maintitle { font-size: 1.2rem; }
+        .subtitle { font-size: 0.85rem; }
+        .form-doc-title { font-size: 1rem; padding: 3px 12px; }
+
+        .top-section-layout {
+            grid-template-areas: 
+                "meta"
+                "decl"
+                "photo";
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .form-doc-header {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+        .header-logo {
+            padding-right: 0 !important;
+            margin-bottom: 12px;
+        }
+        .header-logo img { width: 80px; }
+        .header-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header-content div[style*="justify-content: space-between"] {
+            justify-content: center !important;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.75rem !important;
+        }
+        .meta-box { width: 100%; }
+        .declaration { margin-left: 0 !important; width: 100%; }
+        .photo-capture-area { margin-top: 10px; width: 100%; }
+        
         .top-meta {
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
             align-items: center;
         }
+        .app-no {
+            font-size: 0.95rem;
+            flex-direction: column;
+            width: 100%;
+        }
+        .app-no input {
+            width: 100% !important;
+            max-width: 150px;
+            margin-top: 5px;
+        }
+
+        .form-grid-table {
+            grid-template-columns: 1fr;
+            border: none;
+        }
+        .grid-label {
+            width: 100% !important;
+            background: #f1f5f9;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            border-right: none;
+        }
+        .grid-input {
+            width: 100% !important;
+            padding: 6px 10px 15px 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .form-control-minimal {
+            font-size: 0.85rem;
+            padding: 8px 10px;
+            width: 100% !important;
+        }
+        
+        .multi-col-input {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            width: 100%;
+        }
+        .multi-col-input > div[style*="width: 1px"] {
+            display: none;
+        }
+        .field-combo {
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        .field-combo input, .field-combo select {
+            width: 100% !important;
+            flex: 1;
+        }
+
+        .aadhaar-boxes {
+            justify-content: center;
+            gap: 3px;
+        }
+        .aadhaar-box {
+            width: 25px;
+            height: 38px;
+            font-size: 0.9rem;
+            border-radius: 3px;
+        }
+
+        .sub-table {
+            grid-template-columns: 1fr;
+        }
+        .sub-th { display: none; }
+        .sub-td {
+            border-right: none;
+            padding: 8px 0;
+            width: 100%;
+        }
+        .sub-td::before {
+            content: attr(data-label);
+            display: block;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+        .sub-input {
+            text-align: left !important;
+            font-size: 0.9rem;
+            padding: 8px;
+        }
+
+        .declaration {
+            font-size: 0.9rem;
+            padding: 10px;
+            margin: 15px 0 !important;
+            border-left: 3px solid var(--primary-color);
+        }
+
         .signature-area {
             flex-direction: column;
+            gap: 30px;
+            padding-top: 20px;
+        }
+        .sig-box { width: 100%; }
+        .sig-line { margin-top: 35px; font-size: 0.85rem; }
+
+        /* Step 2 Family Table Responsiveness */
+        #step2 table, #step2 thead, #step2 tbody, #step2 th, #step2 td, #step2 tr {
+            display: block;
+            width: 100%;
+        }
+        #step2 thead { display: none; }
+        #step2 tr {
+            border: 1px solid #cbd5e1;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+        #step2 td {
+            border: none;
+            padding: 8px 0 8px 45% !important;
+            position: relative;
+            min-height: 35px;
+            display: flex;
             align-items: center;
-            gap: 40px;
+            border-bottom: 1px solid #f1f5f9;
         }
-        .aadhaar-boxes {
-            flex-wrap: wrap;
+        #step2 td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 40%;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #64748b;
         }
-        .sub-table {
-            grid-template-columns: 1fr 1fr;
+        #step2 td input, #step2 td select {
+            font-size: 0.85rem !important;
+            width: 100% !important;
         }
-        .sub-th, .sub-td {
-            border-bottom: 1px solid #cbd5e1;
-        }
-        /* Mobile specific adjustments for subtable */
-        .sub-th:nth-child(2), .sub-td:nth-child(6) {
-           border-right: none; 
+
+        .btn-apply {
+            width: 100%;
+            padding: 10px 15px !important;
+            font-size: 0.85rem !important;
         }
     }
-    @media (max-width: 600px) {
-        .electoral-grid {
-            grid-template-columns: 1fr;
+
+    /* Success Modal Styles */
+    #successModal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content-success {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 450px;
+        width: 90%;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+        border: 4px solid var(--primary-color);
+    }
+    #successModal.show {
+        display: flex;
+    }
+    #successModal.show .modal-content-success {
+        transform: scale(1);
+    }
+
+    /* Print Styles */
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        .membership-container, .membership-container *, .form-card, .form-card * {
+            visibility: visible;
+        }
+        .membership-container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .form-card {
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+        .page-hero, .language-toggle-wrapper, .navbar, .footer, .btn-apply, .btn-draft-action, #successModal, .header-divider {
+            display: none !important;
+        }
+        #step1, #step2 {
+            display: block !important; /* Final print shows both if applicable, but usually we just print the final state */
+        }
+        .submit-area {
+            display: none !important;
         }
     }
 </style>
@@ -498,50 +743,88 @@
             
             <!-- Document Header -->
             <div class="form-doc-header">
-                <div class="maintitle lang-text" data-en="AKHILA BHARATA VEERASHAIVA LINGAYATA MAHASABHA (R.)" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)">
-                    ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)
+                <div class="header-logo">
+                    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="AIVMM Logo">
                 </div>
-                <div class="subtitle lang-text" data-en='No. 17/4, "Veerashaiva-Lingayata Bhavan", Ramana Maharshi Raste, Sadashivanagar, Bengaluru-560080' data-kn='ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080'>
-                    ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080
-                </div>
-                <div class="subtitle">
-                    Ph: 080-23618400, 23602177/78 | e-mail: info@veerashaivamahasabha.com | www.veerashaivamahasabha.org.in
-                </div>
-                
-                <div class="form-doc-title lang-text" data-en="MEMBERSHIP APPLICATION" data-kn="ಸದಸ್ಯತ್ವದ ಅರ್ಜಿ">
-                    ಸದಸ್ಯತ್ವದ ಅರ್ಜಿ
+                <div class="header-content">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: #4b5563; margin-bottom: 5px;">
+                        <span>ESTED: 1904</span>
+                        <span>Reg.No.96/76-77</span>
+                        <span>Date: 5-7-1976</span>
+                    </div>
+                    <div class="maintitle lang-text" data-en="AKHILA BHARATA VEERASHAIVA LINGAYATA MAHASABHA (R.)" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)">
+                        ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)
+                    </div>
+                    <div class="subtitle lang-text" data-en='No. 17/4, "Veerashaiva-Lingayata Bhavan", Ramana Maharshi Raste, Sadashivanagar, Bengaluru-560080' data-kn='ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080'>
+                        ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080
+                    </div>
+                    <div class="subtitle">
+                        Ph: 080-23618400, 23602177/78 | e-mail: info@veerashaivamahasabha.com | www.veerashaivamahasabha.org.in
+                    </div>
+                    
+                    <div class="form-doc-title lang-text" data-en="MEMBERSHIP APPLICATION" data-kn="ಸದಸ್ಯತ್ವದ ಅರ್ಜಿ">
+                        ಸದಸ್ಯತ್ವದ ಅರ್ಜಿ
+                    </div>
                 </div>
             </div>
 
-            <!-- Top Meta: Application Number & Photo -->
-            <div class="top-meta">
+            <!-- Top Section: App No, Photo, and Declaration -->
+            <div class="top-section-layout">
                 <div class="meta-box">
                     <div class="app-no">
                         <span class="lang-text" data-en="Application No :" data-kn="ಅರ್ಜಿ ಸಂಖ್ಯೆ :">ಅರ್ಜಿ ಸಂಖ್ಯೆ :</span>
                         <input type="text" name="applicationNo" readonly value="H-" style="width: 100px;">
                     </div>
-                    <div style="margin-top: 15px; max-width: 350px;">
+                    <div style="margin-top: 15px; max-width: 350px; margin-left: 40px;">
                         <strong class="lang-text" data-en="To The President," data-kn="ಅಧ್ಯಕ್ಷರಿಗೆ">ಅಧ್ಯಕ್ಷರಿಗೆ</strong><br>
                         <span class="lang-text" data-en="Akhila Bharata Veerashaiva Lingayata Mahasabha (R.), Bengaluru" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು</span>
                     </div>
                 </div>
 
-                <div class="photo-box">
-                    <div id="photoPlaceholder">
-                        <i class="fas fa-camera" style="font-size: 24px; margin-bottom: 8px;"></i><br>
-                        <span class="lang-text" data-en="Passport Size Photo" data-kn="ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜಿನ ಫೋಟೋ">ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜಿನ ಫೋಟೋ</span>
+                <div class="declaration lang-text" style="margin-left: 40px;" data-en="Sir, I agree to the rules and regulations of the Akhila Bharata Veerashaiva Lingayata Mahasabha and request you to grant me membership." data-kn="ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.">
+                    ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.
+                </div>
+
+                <!-- Upload or Capture Photo -->
+                <div class="photo-capture-area">
+                    <div class="photo-box" style="margin-bottom: 10px;">
+                        <div id="photoPlaceholder">
+                            <i class="fas fa-camera" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                            <span class="lang-text" data-en="Passport Size Photo" data-kn="ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜಿನ ಫೋಟೋ">ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜಿನ ಫೋಟೋ</span>
+                        </div>
+                        <img id="photoPreview" src="" alt="Photo Preview">
                     </div>
-                    <img id="photoPreview" src="" alt="Photo Preview">
-                    <input type="file" id="applicantPhoto" name="photo" accept="image/*" required>
+                    
+                    <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
+                        <button type="button" onclick="document.getElementById('applicantPhoto').click()" style="padding: 6px 12px; background: #e2e8f0; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.85rem; cursor: pointer; color: #334155; font-weight: 600;">
+                            <i class="fas fa-upload"></i> <span class="lang-text" data-en="Upload" data-kn="ಹತ್ತಿಸಿ">Upload</span>
+                        </button>
+                        <button type="button" id="btnLiveCam" style="padding: 6px 12px; background: #2563eb; border: 1px solid #1d4ed8; border-radius: 4px; font-size: 0.85rem; cursor: pointer; color: white; font-weight: 600;">
+                            <i class="fas fa-camera"></i> <span class="lang-text" data-en="Capture" data-kn="ಕ್ಯಾಮೆರಾ">Capture</span>
+                        </button>
+                    </div>
+
+                    <input type="file" id="applicantPhoto" name="photo" accept="image/*" style="display: none;" required>
+
+                    <!-- Camera Interface -->
+                    <div id="camContainer" style="display: none; position: absolute; z-index: 100; top: 0; background: white; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 220px;">
+                        <h4 style="text-align: center; margin-bottom: 8px; color: #334155; font-size: 0.95rem;">Live Camera</h4>
+                        <video id="liveVideo" autoplay playsinline style="width: 100%; height: 160px; background: #000; border-radius: 4px;"></video>
+                        <canvas id="photoCanvas" style="display: none;"></canvas>
+                        <div style="display: flex; gap: 8px; margin-top: 10px;">
+                            <button type="button" id="btnCapture" style="flex: 2; padding: 8px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; font-weight: bold;">
+                                <i class="fas fa-camera"></i> Capture
+                            </button>
+                            <button type="button" id="btnCloseCam" style="flex: 1; padding: 8px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem; font-weight: bold;">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Declaration -->
-            <div class="declaration lang-text" data-en="Sir, I agree to the rules and regulations of the Akhila Bharata Veerashaiva Lingayata Mahasabha and request you to grant me membership." data-kn="ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.">
-                ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.
-            </div>
-
             <!-- Main Form Grid -->
+            <div id="step1">
             <div class="form-grid-table">
                 
                 <!-- Applicant Name -->
@@ -605,30 +888,16 @@
 
                 <!-- Family Details & Blood Group -->
                 <div class="grid-row">
-                    <div class="grid-label lang-text" data-en="Family Details & Blood Group" data-kn="ಕುಟುಂಬದ ವಿವರ ಮತ್ತು ರಕ್ತದ ಗುಂಪು">ಕುಟುಂಬದ ವಿವರ ಮತ್ತು ರಕ್ತದ ಗುಂಪು</div>
+                    <div class="grid-label lang-text" data-en="Family Details" data-kn="ಕುಟುಂಬದ ವಿವರ">ಕುಟುಂಬದ ವಿವರ</div>
                     <div class="grid-input multi-col-input">
-                        <div class="sub-table" style="flex-grow: 1;">
+                        <div class="sub-table" style="flex-grow: 1; grid-template-columns: repeat(3, 1fr);">
                             <div class="sub-th lang-text" data-en="Male Children" data-kn="ಗ.ಮಕ್ಕಳು">ಗ.ಮಕ್ಕಳು</div>
                             <div class="sub-th lang-text" data-en="Female Children" data-kn="ಹೆ.ಮಕ್ಕಳು">ಹೆ.ಮಕ್ಕಳು</div>
                             <div class="sub-th lang-text" data-en="Total" data-kn="ಒಟ್ಟು">ಒಟ್ಟು</div>
-                            <div class="sub-th lang-text" data-en="Blood Group" data-kn="ರಕ್ತದ ಗುಂಪು">ರಕ್ತದ ಗುಂಪು</div>
                             
-                            <div class="sub-td"><input type="number" name="maleChildren" class="sub-input" min="0" value="0"></div>
-                            <div class="sub-td"><input type="number" name="femaleChildren" class="sub-input" min="0" value="0"></div>
-                            <div class="sub-td"><input type="number" name="totalChildren" class="sub-input" readonly value="0"></div>
-                            <div class="sub-td">
-                                <select name="bloodGroup" class="sub-input" required>
-                                    <option value="">-</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
-                                </select>
-                            </div>
+                            <div class="sub-td" data-label="Male Children"><input type="number" name="maleChildren" class="sub-input" min="0" value="0"></div>
+                            <div class="sub-td" data-label="Female Children"><input type="number" name="femaleChildren" class="sub-input" min="0" value="0"></div>
+                            <div class="sub-td" data-label="Total"><input type="number" name="totalChildren" class="sub-input" readonly value="0"></div>
                         </div>
                     </div>
                 </div>
@@ -686,7 +955,9 @@
                         </div>
                     </div>
                 </div>
+            </div> <!-- End form-grid-table for Step 1 -->
 
+            <div class="form-grid-table" style="margin-top: 20px; border-top: none;">
                 <!-- Payment Details -->
                 <div class="grid-row">
                     <div class="grid-label lang-text" data-en="Payment Details" data-kn="ಪಾವತಿ ವಿವರ">ಪಾವತಿ ವಿವರ</div>
@@ -728,7 +999,7 @@
             </div>
 
             <!-- Electoral Representation Table -->
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 30px; border: 1px solid var(--form-border); padding: 15px; background: #fff;">
                 <h4 class="lang-text" data-en="Electoral Representation (Fill if applicable)" data-kn="ಚುನಾಯಿತ ಪ್ರತಿನಿಧಿ (ಅನ್ವಯಿಸಿದಲ್ಲಿ ಭರ್ತಿ ಮಾಡಿ)" style="color:#334155; margin-bottom: 15px; font-weight:800;">ಚುನಾಯಿತ ಪ್ರತಿನಿಧಿ (ಅನ್ವಯಿಸಿದಲ್ಲಿ ಭರ್ತಿ ಮಾಡಿ)</h4>
                 <div class="electoral-grid">
                     <div class="electoral-item">
@@ -758,24 +1029,68 @@
                 </div>
             </div>
 
-            <!-- Introducer & Signatures -->
-            <div style="margin-top: 40px; border-top: 2px solid var(--form-border); padding-top: 25px; background: #fafaf9; border-radius: 8px; padding: 25px;">
+            <!-- Introducer Section -->
+            <div style="margin-top: 30px; border: 1px solid var(--form-border); padding: 20px; background: #f8fafc; border-radius: 4px;">
                 <div class="multi-col-input">
                     <div class="field-combo" style="flex:2;">
                         <span class="lang-text" style="color:#475569; font-weight:700;" data-en="Introducer Name:" data-kn="ಪ್ರೋತ್ಸಾಹ ನೀಡಿದವರ ಹೆಸರು :">ಪ್ರೋತ್ಸಾಹ ನೀಡಿದವರ ಹೆಸರು :</span>
-                        <input type="text" name="introducerName" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding-bottom:4px;">
+                        <input type="text" name="introducerName" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;">
                     </div>
                     <div class="field-combo" style="flex:1;">
                         <span class="lang-text" style="color:#475569; font-weight:700;" data-en="Membership No:" data-kn="ಸದಸ್ಯತ್ವದ ಸಂಖ್ಯೆ:">ಸದಸ್ಯತ್ವದ ಸಂಖ್ಯೆ:</span>
-                        <input type="text" name="introducerMemNo" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding-bottom:4px;">
+                        <input type="text" name="introducerMemNo" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;">
                     </div>
                 </div>
             </div>
 
+            <!-- Actions for Step 1 -->
+            <div class="submit-area style-step1-actions" style="margin-top: 30px; text-align: center; display: flex; gap: 15px; justify-content: center;">
+                <button type="button" class="btn-apply btn-draft-action" style="background: #e2e8f0; color: #334155; box-shadow: none;">
+                    <i class="fas fa-save" style="margin-right: 8px;"></i>
+                    <span class="lang-text" data-en="Save Draft" data-kn="ಕರಡು ಉಳಿಸಿ">Save Draft</span>
+                </button>
+                <button type="button" class="btn-apply btn-next-step" id="btnNextStep">
+                    <span class="lang-text" data-en="Submit & Proceed to Step 2" data-kn="ಸಲ್ಲಿಸಿ ಮತ್ತು ಹಂತ 2 ಕ್ಕೆ ಮುಂದುವರೆಯಿರಿ">Submit & Proceed to Step 2</span>
+                    <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+                </button>
+            </div>
+        </div> <!-- End step1 div -->
+
+        <div id="step2" style="display:none;">
+            <!-- Step 1 Summary Review Card -->
+            <div id="step1Summary" class="form-card" style="padding: 20px; border: 1px solid #e2e8f0; background: #f8fafc; margin-bottom: 25px; box-shadow: none;">
+                <h4 class="lang-text" data-en="Review Personal Information" data-kn="ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ" style="margin-bottom: 15px; color: #1e293b;">ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ</h4>
+                <div id="summaryContent" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; font-size: 0.95rem;">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Detailed Family Info Section -->
+            <div class="form-card" style="padding: 30px; border: 2px solid var(--form-border); margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+                    <h4 class="lang-text" data-en="Detailed Family Member Information" data-kn="ಕುಟುಂಬ ಸದಸ್ಯರ ವಿವರವಾದ ಮಾಹಿತಿ" style="color: #1e293b; margin: 0; font-weight: 800;">ಕುಟುಂಬ ಸದಸ್ಯರ ವಿವರವಾದ ಮಾಹಿತಿ</h4>
+                </div>
+                <div id="familyMembersContainer">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                        <thead>
+                            <tr style="background: #f1f5f9;">
+                                <th class="lang-text" data-en="Relation" data-kn="ಸಂಬಂಧ" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಸಂಬಂಧ</th>
+                                <th class="lang-text" data-en="Full Name" data-kn="ಪೂರ್ಣ ಹೆಸರು" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಪೂರ್ಣ ಹೆಸರು</th>
+                                <th class="lang-text" data-en="Mobile Number" data-kn="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</th>
+                                <th class="lang-text" data-en="Blood Group" data-kn="ರಕ್ತದ ಗುಂಪು" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left; width: 120px;">ರಕ್ತದ ಗುಂಪು</th>
+                            </tr>
+                        </thead>
+                        <tbody id="familyMembersBody">
+                            <!-- Dynamic Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
             <div class="signature-area">
                 <div class="sig-box">
-                    <input type="date" name="applicationDate" class="form-control-minimal" style="border-bottom: 2px dashed var(--form-border); width: 180px; text-align: center; margin-bottom: 10px; padding-bottom:5px;" required>
-                    <div class="sig-line lang-text" data-en="Date" data-kn="ದಿನಾಂಕ">ದಿನಾಂಕ</div>
+                    <input type="date" name="applicationDate" id="applicationDate" class="form-control-minimal" style="border:none; border-bottom: 2px dashed var(--form-border); width: 180px; text-align: center; margin-bottom: 10px; padding-bottom:5px; background: transparent; font-weight:700; color:#334155; cursor: default;" readonly required>
                 </div>
                 <div class="sig-box">
                     <div class="sig-line lang-text" data-en="Applicant Signature" data-kn="ಅರ್ಜಿದಾರರ ಸಹಿ">ಅರ್ಜಿದಾರರ ಸಹಿ</div>
@@ -783,15 +1098,47 @@
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="submit-area">
-                <button type="submit" class="btn-apply">
-                    <span class="lang-text" data-en="Submit Application" data-kn="ಅರ್ಜಿ ಸಲ್ಲಿಸಿ">ಅರ್ಜಿ ಸಲ್ಲಿಸಿ</span>
-                    <i class="fas fa-check-circle" style="margin-left: 8px;"></i>
+            <!-- Action Buttons for Step 2 -->
+            <div class="submit-area" style="display: flex; gap: 15px; justify-content: center;">
+                <button type="button" class="btn-apply btn-prev-step" id="btnPrevStep" style="background: #94a3b8; box-shadow: none;">
+                    <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                    <span class="lang-text" data-en="Back to Step 1" data-kn="ಹಂತ 1 ಕ್ಕೆ ಹಿಂತಿರುಗಿ">Back to Step 1</span>
+                </button>
+                <button type="submit" class="btn-apply" id="btnFinalSubmit">
+                    <span class="lang-text" data-en="Final Submit" data-kn="ಅಂತಿಮ ಸಲ್ಲಿಕೆ">Final Submit</span>
+                    <i class="fas fa-check" style="margin-left: 8px;"></i>
                 </button>
             </div>
+        </div> <!-- End step2 div -->
             
         </form>
+    </div>
+</div>
+
+<!-- Success Popup Modal -->
+<div id="successModal">
+    <div class="modal-content-success">
+        <div style="width: 80px; height: 80px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px;">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 class="lang-text" data-en="Success!" data-kn="ಯಶಸ್ವಿಯಾಗಿದೆ!" style="color: #1e293b; margin-bottom: 5px;">Success!</h2>
+        <p class="lang-text" data-en="Welcome to Veerashaiva Mahasabha" data-kn="ವೀರಶೈವ ಮಹಾಸಭೆಗೆ ಸುಸ್ವಾಗತ" style="font-size: 1.1rem; color: #475569; font-weight: 600; margin-bottom: 20px;">
+            Welcome to Veerashaiva Mahasabha
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+            <button type="button" class="btn-apply" onclick="closeModalAndView()" style="width: 100%; padding: 10px 15px; background: #64748b; font-size: 0.9rem;">
+                <i class="fas fa-eye"></i> <span class="lang-text" data-en="View Application" data-kn="ಅರ್ಜಿಯನ್ನು ನೋಡಿ">View Application</span>
+            </button>
+            <button type="button" class="btn-apply" onclick="printApplication()" style="width: 100%; padding: 10px 15px; background: #1e293b; font-size: 0.9rem;">
+                <i class="fas fa-print"></i> <span class="lang-text" data-en="Print Form" data-kn="ಅರ್ಜಿಯನ್ನು ಮುದ್ರಿಸಿ">Print Form</span>
+            </button>
+            <button type="button" class="btn-apply" onclick="downloadApplicationPDF()" style="grid-column: span 2; padding: 12px 20px;">
+                <i class="fas fa-file-pdf"></i> <span class="lang-text" data-en="Download Application (PDF)" data-kn="ಅರ್ಜಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ (PDF)">Download Application (PDF)</span>
+            </button>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.85rem; color: #64748b;">
+            <a href="/membership" class="lang-text" data-en="Return to Membership Page" data-kn="ಸದಸ್ಯತ್ವ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">Return to Membership Page</a>
+        </p>
     </div>
 </div>
 
@@ -802,34 +1149,33 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === LANGUAGE TOGGLE LOGIC ===
     const langToggle = document.getElementById('langToggle');
-    const langLabels = document.querySelectorAll('.lang-label');
     const langElements = document.querySelectorAll('.lang-text');
-    
-    // Default language is Kannada (toggle unchecked)
     let currentLang = 'kn';
 
     function updateLanguage() {
-        if(langToggle.checked) {
-            currentLang = 'en';
-            document.querySelector('.label-en').classList.add('active');
-            document.querySelector('.label-kn').classList.remove('active');
-        } else {
-            currentLang = 'kn';
-            document.querySelector('.label-kn').classList.add('active');
-            document.querySelector('.label-en').classList.remove('active');
-        }
+        currentLang = langToggle.checked ? 'en' : 'kn';
+        
+        // Update labels
+        document.querySelector('.label-en').classList.toggle('active', currentLang === 'en');
+        document.querySelector('.label-kn').classList.toggle('active', currentLang === 'kn');
 
+        // Update all text elements
         langElements.forEach(el => {
-            if(el.tagName.toLowerCase() === 'option') {
-                el.textContent = el.getAttribute(`data-${currentLang}`);
+            const translation = el.getAttribute(`data-${currentLang}`);
+            if (!translation) return;
+
+            if (el.tagName.toLowerCase() === 'option') {
+                el.textContent = translation;
+            } else if (el.tagName.toLowerCase() === 'input' && (el.type === 'button' || el.type === 'submit')) {
+                el.value = translation;
             } else {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
+                el.innerText = translation;
             }
         });
     }
 
     langToggle.addEventListener('change', updateLanguage);
-    updateLanguage(); // Init
+    updateLanguage(); // Initial run
 
     // === AADHAAR INPUT LOGIC ===
     const aadhaarInputs = document.querySelectorAll('.aadhaar-box');
@@ -837,7 +1183,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aadhaarInputs.forEach((input, index) => {
         input.addEventListener('input', (e) => {
-            // Only allow numbers
             e.target.value = e.target.value.replace(/\D/g, '');
             if(e.target.value.length === 1 && index < aadhaarInputs.length - 1) {
                 aadhaarInputs[index + 1].focus();
@@ -855,63 +1200,298 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateHiddenAadhaar() {
         let val = '';
         aadhaarInputs.forEach(i => val += i.value);
-        aadhaarHidden.value = val;
+        if (aadhaarHidden) aadhaarHidden.value = val;
     }
 
-    // === PHOTO PREVIEW LOGIC ===
+    // === PHOTO PREVIEW & CAPTURE LOGIC ===
     const photoInput = document.getElementById('applicantPhoto');
     const photoPreview = document.getElementById('photoPreview');
     const photoPlaceholder = document.getElementById('photoPlaceholder');
+    const btnLiveCam = document.getElementById('btnLiveCam');
+    const camContainer = document.getElementById('camContainer');
+    const liveVideo = document.getElementById('liveVideo');
+    const btnCapture = document.getElementById('btnCapture');
+    const btnCloseCam = document.getElementById('btnCloseCam');
+    const photoCanvas = document.getElementById('photoCanvas');
+    let videoStream = null;
 
-    photoInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                photoPreview.src = e.target.result;
-                photoPreview.style.display = 'block';
-                photoPlaceholder.style.display = 'none';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // === FAMILY DETAILS CALCULATION ===
-    const mChild = document.querySelector('input[name="maleChildren"]');
-    const fChild = document.querySelector('input[name="femaleChildren"]');
-    const tChild = document.querySelector('input[name="totalChildren"]');
-
-    function calcTotal() {
-        tChild.value = (parseInt(mChild.value) || 0) + (parseInt(fChild.value) || 0);
-    }
-    mChild.addEventListener('input', calcTotal);
-    fChild.addEventListener('input', calcTotal);
-
-    // === CLASSIFICATION AMOUNT AUTOFILL ===
-    const classSelect = document.getElementById('classificationSelect');
-    const feeAmount = document.getElementById('feeAmount');
-
-    classSelect.addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        if(selectedOption.value) {
-            feeAmount.value = selectedOption.getAttribute('data-amount');
-        } else {
-            feeAmount.value = '';
-        }
-    });
-
-    // Handle initial selection if any (e.g. from URL query)
-    const urlParams = new URLSearchParams(window.location.search);
-    const tierParam = urlParams.get('tier');
-    if (tierParam) {
-        // Find matching option (case insensitive approx)
-        Array.from(classSelect.options).forEach(opt => {
-            if(opt.value.toLowerCase().replace(' ', '_') === tierParam.toLowerCase()) {
-                opt.selected = true;
-                classSelect.dispatchEvent(new Event('change'));
+    if (photoInput) {
+        photoInput.addEventListener('change', function() {
+            if(this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoPreview.src = e.target.result;
+                    photoPreview.style.display = 'block';
+                    photoPlaceholder.style.display = 'none';
+                }
+                reader.readAsDataURL(this.files[0]);
             }
         });
     }
+
+    if (btnLiveCam) {
+        btnLiveCam.addEventListener('click', async () => {
+            camContainer.style.display = 'block';
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                liveVideo.srcObject = videoStream;
+            } catch (err) {
+                alert('Camera access denied or unavailable.');
+                camContainer.style.display = 'none';
+            }
+        });
+    }
+
+    if (btnCloseCam) {
+        btnCloseCam.addEventListener('click', () => {
+            camContainer.style.display = 'none';
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+        });
+    }
+
+    if (btnCapture) {
+        btnCapture.addEventListener('click', () => {
+            if (!videoStream) return;
+            photoCanvas.width = liveVideo.videoWidth;
+            photoCanvas.height = liveVideo.videoHeight;
+            photoCanvas.getContext('2d').drawImage(liveVideo, 0, 0, photoCanvas.width, photoCanvas.height);
+            
+            const dataURL = photoCanvas.toDataURL('image/jpeg');
+            const file = dataURLtoFile(dataURL, 'live_photo.jpg');
+
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            photoInput.files = dataTransfer.files;
+
+            photoInput.dispatchEvent(new Event('change'));
+            btnCloseCam.click();
+        });
+    }
+
+    function dataURLtoFile(dataurl, filename) {
+        let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){ u8arr[n] = bstr.charCodeAt(n); }
+        return new File([u8arr], filename, {type:mime});
+    }
+
+    // === STEP NAVIGATION LOGIC ===
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const btnNextStep = document.getElementById('btnNextStep');
+    const btnPrevStep = document.getElementById('btnPrevStep');
+    const summaryContent = document.getElementById('summaryContent');
+    const familyMembersBody = document.getElementById('familyMembersBody');
+
+    if (btnNextStep) {
+        btnNextStep.addEventListener('click', () => {
+            const inputsStep1 = step1.querySelectorAll('input[required], select[required]');
+            let allValid = true;
+            inputsStep1.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    allValid = false;
+                }
+            });
+
+            if (allValid) {
+                populateSummary();
+                generateFamilyRows();
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+
+    if (btnPrevStep) {
+        btnPrevStep.addEventListener('click', () => {
+            step2.style.display = 'none';
+            step1.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    function populateSummary() {
+        const fields = [
+            { label: 'Name', name: 'applicantName' },
+            { label: 'Father/Husband', name: 'fatherHusbandName' },
+            { label: 'DOB', name: 'dob' },
+            { label: 'Education', name: 'education' },
+            { label: 'Phone', name: 'phone' }
+        ];
+        
+        summaryContent.innerHTML = '';
+        fields.forEach(f => {
+            const input = document.querySelector(`[name="${f.name}"]`);
+            if (input) {
+                summaryContent.innerHTML += `
+                    <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">
+                        <strong style="color: #64748b; font-size: 0.8rem; display: block;">${f.label}</strong>
+                        <span>${input.value || '-'}</span>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    function generateFamilyRows() {
+        const mCount = parseInt(document.querySelector('input[name="maleChildren"]').value) || 0;
+        const fCount = parseInt(document.querySelector('input[name="femaleChildren"]').value) || 0;
+        familyMembersBody.innerHTML = '';
+        
+        const spouseName = document.querySelector('input[name="fatherHusbandName"]').value;
+        addFamilyRow('Spouse/Parent', spouseName);
+
+        for(let i=1; i<=mCount; i++) addFamilyRow(`Male Child ${i}`, '');
+        for(let i=1; i<=fCount; i++) addFamilyRow(`Female Child ${i}`, '');
+    }
+
+    function addFamilyRow(relation, defaultName) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td data-label="Relation" style="padding: 10px; border: 1px solid #cbd5e1;"><strong>${relation}</strong></td>
+            <td data-label="Full Name" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="text" name="family_name[]" value="${defaultName}" class="form-control-minimal" style="padding: 8px;"></td>
+            <td data-label="Mobile Number" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="tel" name="family_mobile[]" class="form-control-minimal" style="padding: 8px;" maxlength="10"></td>
+            <td data-label="Blood Group" style="padding: 10px; border: 1px solid #cbd5e1;">
+                <select name="family_blood[]" class="form-control-minimal" style="padding: 4px; border-bottom: 2px dashed #cbd5e1;">
+                    <option value="">-</option>
+                    <option value="A+">A+</option><option value="A-">A-</option>
+                    <option value="B+">B+</option><option value="B-">B-</option>
+                    <option value="O+">O+</option><option value="O-">O-</option>
+                    <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                </select>
+            </td>
+        `;
+        familyMembersBody.appendChild(row);
+    }
+
+    // === DYNAMIC TOTALS & DEFAULTS ===
+    const mChild = document.querySelector('input[name="maleChildren"]');
+    const fChild = document.querySelector('input[name="femaleChildren"]');
+    const tChild = document.querySelector('input[name="totalChildren"]');
+    if (mChild && fChild) {
+        const calc = () => tChild.value = (parseInt(mChild.value) || 0) + (parseInt(fChild.value) || 0);
+        mChild.addEventListener('input', calc);
+        fChild.addEventListener('input', calc);
+    }
+
+    const dateField = document.getElementById('applicationDate');
+    if (dateField) {
+        const today = new Date();
+        dateField.value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    }
+
+    // === DRAFT & SUBMIT LOGIC ===
+    const form = document.getElementById('membershipForm');
+    const btnDrafts = document.querySelectorAll('.btn-draft-action');
+    
+    btnDrafts.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const formData = new FormData(form);
+            let data = {};
+            for (let [key, val] of formData.entries()) if (typeof val === 'string') data[key] = val;
+            
+            fetch('/api/save_draft', { method: 'POST', body: formData })
+                .then(() => {
+                    localStorage.setItem('membershipDraft', JSON.stringify(data));
+                    alert(currentLang === 'en' ? 'Draft saved!' : 'ಕರಡು ಉಳಿಸಲಾಗಿದೆ!');
+                });
+        });
+    });
+
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            fetch('/api/submit_membership', { method: 'POST', body: new FormData(form) })
+                .then(() => {
+                    localStorage.removeItem('membershipDraft');
+                    const modal = document.getElementById('successModal');
+                    if (modal) {
+                        modal.classList.add('show');
+                    } else {
+                        alert(currentLang === 'en' ? 'Submitted!' : 'ಸಲ್ಲಿಸಲಾಗಿದೆ!');
+                        window.location.href = '/membership';
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Submission failed. Please try again.');
+                });
+        });
+    }
+
+    // Load Draft
+    const savedDraft = localStorage.getItem('membershipDraft');
+    if (savedDraft) {
+        try {
+            const data = JSON.parse(savedDraft);
+            for (let key in data) {
+                const input = document.querySelector(`[name="${key}"]`);
+                if (input && input.type !== 'file') input.value = data[key];
+            }
+            updateLanguage();
+        } catch(e) {}
+    }
 });
+
+// Global functions for post-submission actions
+window.setFieldsReadOnly = function() {
+    const inputs = document.querySelectorAll('input, select, textarea, button:not(.btn-apply)');
+    inputs.forEach(el => {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.readOnly = true;
+        if (el.tagName === 'SELECT' || el.tagName === 'BUTTON') el.disabled = true;
+    });
+};
+
+window.closeModalAndView = function() {
+    const modal = document.getElementById('successModal');
+    if (modal) modal.classList.remove('show');
+    window.setFieldsReadOnly();
+    // Show both steps for review
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'block';
+    // Hide action areas
+    document.querySelectorAll('.submit-area').forEach(el => el.style.display = 'none');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.printApplication = function() {
+    // Briefly ensure both steps are visible for printing
+    const s1 = document.getElementById('step1');
+    const s2 = document.getElementById('step2');
+    const s1Orig = s1.style.display;
+    const s2Orig = s2.style.display;
+    
+    s1.style.display = 'block';
+    s2.style.display = 'block';
+    
+    window.print();
+    
+    // Restore if needed, or if in ReadOnly view, keep as is
+};
+
+window.downloadApplicationPDF = function() {
+    const element = document.querySelector('.form-card');
+    const applicantName = document.querySelector('input[name="applicantName"]').value || 'Application';
+    const opt = {
+        margin:       0.2,
+        filename:     `Membership_${applicantName.replace(/\s+/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // Ensure both steps are captured
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'block';
+    const subAreas = document.querySelectorAll('.submit-area');
+    subAreas.forEach(el => el.style.display = 'none');
+
+    html2pdf().set(opt).from(element).save();
+};
 </script>
 {% endblock %}

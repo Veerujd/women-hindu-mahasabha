@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Application - {{ app.applicant_name }}</title>
+    <!-- Google Fonts for Kannada Support -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Use local PDF library -->
+    <script src="{{ url_for('static', filename='js/html2pdf.bundle.min.js') }}"></script>
+    <style>
+        @page { size: A4; margin: 0; }
+        body { font-family: 'Noto Sans Kannada', 'Helvetica', 'Arial', sans-serif; font-size: 10px; color: #000; margin: 0; padding: 0; background: #fff; line-height: 1.2; }
+        
+        /* A4 Precision Container */
+        .page-container { 
+            width: 210mm; 
+            height: 297mm; 
+            padding: 8mm 10mm; 
+            box-sizing: border-box; 
+            margin: 0 auto; 
+            position: relative; 
+            background: white;
+            overflow: hidden;
+        }
+        
+        .header-top { display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 5px; }
+        
+        .header-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid #000; padding-bottom: 6px; }
+        .logo-box { width: 80px; text-align: left; }
+        .logo-img { width: 70px; height: 70px; }
+        
+        .header-text { flex: 1; text-align: center; padding: 0 8px; font-family: 'Noto Sans Kannada', sans-serif; }
+        .header-text h1 { font-size: 17px; margin: 0; font-weight: bold; line-height: 1.1; font-family: 'Noto Sans Kannada', sans-serif; }
+        .header-text p { margin: 1px 0; font-size: 9.5px; line-height: 1.1; font-family: 'Noto Sans Kannada', sans-serif; }
+
+        .photo-box { width: 90px; height: 110px; border: 1px solid #000; text-align: center; font-size: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fafafa; }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .app-no-section { margin-top: 4px; margin-bottom: 6px; font-size: 10px; }
+        .title-box { text-align: center; margin: 4px 0; }
+        .title-box span { border: 1px solid #000; padding: 3px 20px; font-weight: bold; font-size: 12px; background: #f8fafc; }
+
+        table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+        td, th { border: 1px solid #000; padding: 3px 6px; text-align: left; vertical-align: middle; }
+        .label { font-weight: normal; width: 130px; background: #fcfcfc; font-size: 9.5px; }
+        .value { font-weight: bold; font-size: 10.5px; }
+        
+        .aadhaar-box-container { display: flex; gap: 0; margin-left: 5px; }
+        .aadhaar-char { width: 17px; height: 19px; border: 1px solid #000; text-align: center; line-height: 19px; font-weight: bold; font-size: 11px; }
+
+        .section-desc { font-style: normal; margin-bottom: 4px; font-size: 9.5px; line-height: 1.3; color: #334155; }
+
+        .office-use { margin-top: 8px; border: 1px solid #000; padding: 4px; background: #fff; }
+        .office-header { text-align: center; font-weight: bold; text-decoration: underline; margin-bottom: 4px; font-size: 10px; }
+        
+        .footer-sigs { display: flex; justify-content: space-between; margin-top: 15px; padding: 0 5px; }
+        .sig-col { text-align: center; width: 23%; font-weight: bold; font-size: 8px; border-top: 1px dashed #666; padding-top: 3px; }
+
+        .dashed-line { border-top: 1px dashed #000; margin: 12px 0; position: relative; }
+        .dashed-line::after { content: "✂"; position: absolute; left: 0; top: -10px; background: #fff; padding: 0 5px; }
+
+        .applicant-copy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .qr-code { width: 55px; height: 55px; border: 1px solid #000; }
+
+        /* Print Controls */
+        #print-btn-bar { position: fixed; right: 20px; bottom: 20px; background: rgba(0,0,0,0.8); padding: 12px; border-radius: 8px; display: flex; gap: 12px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn { padding: 10px 18px; background: #ff9933; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; transition: all 0.2s; }
+        .btn:hover { background: #e67e22; transform: scale(1.05); }
+        .btn-system { background: #64748b; }
+        @media print { #print-btn-bar { display: none; } }
+    </style>
+</head>
+<body>
+
+{% set is_kn = app.submission_lang == 'kn' %}
+{% macro t(en, kn) %}{{ kn if is_kn else en }}{% endmacro %}
+
+<div id="print-btn-bar">
+    <button class="btn btn-system" onclick="window.print()">
+        <i class="fas fa-print"></i> {{ t('Print', 'ಮುದ್ರಿಸಿ') }}
+    </button>
+    <button class="btn" id="download-btn" onclick="generatePDF()">
+        <i class="fas fa-file-pdf"></i> {{ t('Download PDF', 'ಡೌನ್‌ಲೋಡ್ PDF') }}
+    </button>
+</div>
+
+<div class="page-container" id="printable-content">
+    <!-- Header -->
+    <div class="header-top">
+        <span>ESTD:1904</span>
+        <span>Reg.96/76-77</span>
+        <span>{{ t('Date', 'ದಿನಾಂಕ') }}: {{ app.application_date or app.created_at.strftime('%d-%m-%Y') }}</span>
+    </div>
+
+    <div class="header-container">
+        <!-- Left: Logo -->
+        <div class="logo-box">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" class="logo-img" onerror="this.src='/static/img/logo.jpg'">
+        </div>
+
+        <!-- Center: Text -->
+        <div class="header-text">
+            <h1>{{ t('Akhila Bharata Veerashaiva Mahila Mahasabha', 'ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭಾ') }}</h1>
+            <p>{{ t('No. 17/4, "Veerashaiva Lingayath Bhavan", Ramanamaharshi Road, Sadashivanagar, Bengaluru-560080', 'ನಂ. 17/4, "ವೀರಶೈವ ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿ ರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080') }}</p>
+            <p>{{ t('Ph: 080-23618400, 23602177, Email: info@veerashaivamahasabha.com', 'ದೂ: 080-23618400, 23602177, ಇ-ಮೇಲ್: info@veerashaivamahasabha.com') }}</p>
+            <p style="font-weight: bold;">www.veerashaivamahasabha.org / www.veerashaivamahasabha.in</p>
+        </div>
+
+        <!-- Right: Photo -->
+        <div class="photo-box">
+            {% if app.photo_filename %}
+            <img src="{{ url_for('static', filename='uploads/member_photos/' + app.photo_filename) }}">
+            {% else %}
+            {{ t('Passport Photo', 'ಪಾಸ್‌ಪೋರ್ಟ್ ಫೋಟೋ') }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="app-no-section">
+        {{ t('Application No', 'ಅರ್ಜಿ ಸಂಖ್ಯೆ') }} : <strong>H {{ app.application_no or app.id }}</strong>
+    </div>
+
+    <div class="title-box">
+        <span>{{ t('MEMBERSHIP APPLICATION', 'ಸದಸ್ಯತ್ವದ ಅರ್ಜಿ') }}</span>
+    </div>
+
+    <p style="margin: 8px 0;">{{ t('To, The President,', 'ಅಧ್ಯಕ್ಷರಿಗೆ,') }} <br> {{ t('Akhila Bharata Veerashaiva Mahila Mahasabha, Bengaluru', 'ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭಾ, ಬೆಂಗಳೂರು') }}</p>
+    <p class="section-desc">
+        {{ t('Dear Sir/Madam,', 'ಮಾನ್ಯರೇ,') }} <br> 
+        {{ t('I request you to grant me membership of Akhila Bharata Veerashaiva Mahila Mahasabha. I agree to abide by the rules and regulations of the Mahasabha.', 'ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.') }}
+    </p>
+
+    <!-- Form Table -->
+    <table>
+        <tr>
+            <td class="label">{{ t("Applicant's Name", 'ಅರ್ಜಿದಾರರ ಹೆಸರು') }}</td>
+            <td colspan="3" class="value">{{ app.applicant_name }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Aadhaar Number', 'ಆಧಾರ್ ಸಂಖ್ಯೆ') }}</td>
+            <td colspan="3">
+                <div class="aadhaar-box-container">
+                    {% for i in range(12) %}
+                    <div class="aadhaar-char">{{ app.aadhaar_no[i] if app.aadhaar_no and app.aadhaar_no|length > i else '' }}</div>
+                    {% endfor %}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Father/Husband Name', 'ತಂದೆ/ಗಂಡನ ಹೆಸರು') }}</td>
+            <td colspan="3" class="value">{{ app.father_husband_name }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t("Mother's Name", 'ತಾಯಿಯ ಹೆಸರು') }}</td>
+            <td colspan="3" class="value">{{ app.mother_name }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Date of Birth', 'ಹುಟ್ಟಿದ ದಿನಾಂಕ') }}</td>
+            <td class="value">{{ app.dob.strftime('%d-%m-%Y') if app.dob else '-' }}</td>
+            <td class="label" style="width: 80px;">{{ t('Gender', 'ಲಿಂಗ') }}:</td>
+            <td class="value">{{ t(app.gender, 'ಹೆಣ್ಣು' if app.gender == 'Female' else 'ಗಂಡು' if app.gender == 'Male' else app.gender) }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Family Details', 'ಕುಟುಂಬದ ವಿವರ') }}</td>
+            <td colspan="3">
+                {{ t('Male', 'ಗಂಡು') }}: <b>{{ app.male_children }}</b> &nbsp;&nbsp; 
+                {{ t('Female', 'ಹೆಣ್ಣು') }}: <b>{{ app.female_children }}</b> &nbsp;&nbsp; 
+                {{ t('Total', 'ಒಟ್ಟು') }}: <b>{{ app.total_children }}</b> &nbsp;&nbsp;
+                {{ t('Blood Group', 'ರಕ್ತದ ಗುಂಪು') }}: <b>{{ app.blood_group }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Education', 'ವಿದ್ಯಾಹ೯ತೆ') }}</td>
+            <td class="value">{{ app.education }}</td>
+            <td class="label" style="width: 80px;">{{ t('Occupation', 'ಉದ್ಯೋಗ') }}</td>
+            <td class="value">{{ app.occupation }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Mobile', 'ಜಂಗಮವಾಣಿ') }}</td>
+            <td class="value">{{ app.mobile }}</td>
+            <td class="label" style="width: 80px;">{{ t('Email', 'ಇ-ಮೇಲ್') }}</td>
+            <td class="value">{{ app.email or '-' }}</td>
+        </tr>
+        <tr>
+            <td class="label" rowspan="2">{{ t('Address', 'ವಿಳಾಸ') }}</td>
+            <td colspan="3" class="value" style="height: 35px; vertical-align: top;">{{ app.address }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                {{ t('Taluk', 'ತಾ||') }}: <b>{{ app.taluk }}</b> &nbsp;&nbsp;&nbsp; 
+                {{ t('District', 'ಜಿ||') }}: <b>{{ app.district }}</b> &nbsp;&nbsp;&nbsp; 
+                {{ t('PIN', 'ಪಿನಕೋಡ್') }}: <b>{{ app.pincode }}</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Payment Details', 'ಪಾವತಿ ವಿವರ') }}</td>
+            <td class="value">{{ app.payment_ref }}</td>
+            <td class="label" style="width: 80px;">{{ t('Amount', 'ರೂ') }}:</td>
+            <td class="value">{{ app.payment_amount }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ t('Classification', 'ವರ್ಗೀಕರಣ') }}</td>
+            <td class="value">{{ app.classification }}</td>
+            <td class="label" style="width: 80px;">{{ t('Project', 'ಯೋಜನೆ') }}:</td>
+            <td class="value">{{ app.specific_project or '-' }}</td>
+        </tr>
+    </table>
+
+    <!-- Representation -->
+    <table style="border-top: none;">
+        <tr>
+            <th style="text-align: center; font-size: 8px;">{{ t('Lok Sabha', 'ಲೋಕಸಭಾ') }}</th>
+            <th style="text-align: center; font-size: 8px;">{{ t('Corporation', 'ಕಾರ್ಪೊರೇಷನ್') }}</th>
+            <th style="text-align: center; font-size: 8px;">{{ t('Vidhan Sabha', 'ವಿಧಾನಸಭಾ') }}</th>
+            <th style="text-align: center; font-size: 8px;">CMC</th>
+            <th style="text-align: center; font-size: 8px;">TMC</th>
+            <th style="text-align: center; font-size: 8px;">{{ t('Gram Panchayat', 'ಗ್ರಾಮ ಪಂಚಾಯತ್') }}</th>
+        </tr>
+        <tr>
+            <td style="text-align: center; height: 22px;">{{ app.rep_lokasabha or '-' }}</td>
+            <td style="text-align: center;">{{ app.rep_corporation or '-' }}</td>
+            <td style="text-align: center;">{{ app.rep_vidhanasabha or '-' }}</td>
+            <td style="text-align: center;">{{ app.rep_cmc or '-' }}</td>
+            <td style="text-align: center;">{{ app.rep_tmc or '-' }}</td>
+            <td style="text-align: center;">{{ app.rep_gram_panchayat or '-' }}</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 8px; display: flex; justify-content: space-between;">
+        <div style="width: 60%; font-size: 10px;">
+            {{ t('Introduced By', 'ಪರಿಚಯಿಸಿದವರ ಹೆಸರು') }} : <b>{{ app.introducer_name }}</b> <br>
+            {{ t('Membership No', 'ಸದಸ್ಯತ್ವ ಸಂಖ್ಯೆ') }} : <b>{{ app.introducer_mem_no }}</b>
+        </div>
+        <div style="width: 35%; text-align: right; font-size: 10px;">
+            <div style="height: 40px;"></div> <!-- Space for physical signature -->
+            {{ t("Applicant's Signature", 'ಅರ್ಜಿದಾರರ ಸಹಿ') }} <br>
+            {{ t('Date', 'ದಿನಾಂಕ') }} : {{ app.created_at.strftime('%d-%m-%Y') }}
+        </div>
+    </div>
+
+    <!-- Office Use -->
+    <div class="office-use">
+        <div class="office-header">{{ t('FOR OFFICE USE ONLY', 'ಕಚೇರಿಯ ಉಪಯೋಗಕ್ಕಾಗಿ') }}</div>
+        <p style="text-align: center; margin: 5px 0; font-size: 10px;">{{ t('Application Accepted / Returned', 'ಮೇಲ್ಕಂಡ ಸದಸ್ಯತ್ವವನ್ನು ಅಂಗೀಕರಿಸಲಾಗಿದೆ / ಹಿಂದಿರುಗಿಸಲಾಗಿದೆ') }}</p>
+        <div style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 10px;">
+            <span>{{ t('Receipt No', 'ರಸೀದಿ ಸಂಖ್ಯೆ') }}: _____________</span>
+            <span>{{ t('Date', 'ದಿನಾಂಕ') }}: _____________</span>
+            <span>{{ t('Reg No', 'ನೋಂದಣಿ ಸಂಖ್ಯೆ') }}: _____________</span>
+        </div>
+        <div class="footer-sigs">
+            <div class="sig-col">{{ t('President', 'ಅಧ್ಯಕ್ಷರು') }}</div>
+            <div class="sig-col">{{ t('Gen. Secretary', 'ಮಹಾಪ್ರಧಾನ ಕಾರ್ಯದರ್ಶಿ') }}</div>
+            <div class="sig-col">{{ t('Treasurer', 'ಕೋಶಾಧ್ಯಕ್ಷರು') }}</div>
+            <div class="sig-col">{{ t('CAO', 'ಮುಖ್ಯ ಆಡಳಿತಾಧಿಕಾರಿಗಳು') }}</div>
+        </div>
+    </div>
+
+    <!-- Applicant Copy -->
+    <div class="dashed-line"></div>
+    
+    <div class="applicant-copy-header">
+        <div class="logo-box" style="width: 60px;">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" class="logo-img" style="width: 55px; height: 55px;">
+        </div>
+        <div class="header-text" style="text-align: center; flex: 1;">
+            <h1 style="font-size: 14px;">{{ t('Akhila Bharata Veerashaiva Mahila Mahasabha', 'ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭಾ(ರಿ.)') }}</h1>
+            <p style="font-size: 8px;">{{ t('No. 17/4, "Veerashaiva Lingayath Bhavan", Bengaluru-560080', 'ನಂ. 17/4, "ವೀರಶೈವ ಲಿಂಗಾಯತ ಭವನ", ಬೆಂಗಳೂರು-560080') }}</p>
+        </div>
+        <div>
+            <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={{ app.application_no or app.id }}&choe=UTF-8" class="qr-code">
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 8px;">
+        <span style="border: 1px solid #000; padding: 2px 15px; font-weight: bold; font-size: 10px; background: #f8fafc;">{{ t("APPLICANT'S COPY", 'ಅರ್ಜಿದಾರರ ಪ್ರತಿ') }}</span>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; font-size: 9.5px;">
+        <span>{{ t('Application No', 'ಅರ್ಜಿ ಸಂಖ್ಯೆ') }} : <b>H {{ app.application_no or app.id }}</b></span>
+        <span>{{ t('Date', 'ದಿನಾಂಕ') }} : <b>{{ app.created_at.strftime('%d-%m-%Y') }}</b></span>
+    </div>
+
+    <p style="margin: 8px 0; font-size: 9.5px;">{{ t('Received from Mr./Mrs.', 'ಶ್ರೀ/ಶ್ರೀಮತಿ') }} __________________________________________________ {{ t('membership fee of Rs.', 'ರವರಿಂದ ಸ್ವೀಕರಿಸಿದ ಸದಸ್ಯತ್ವ ಶುಲ್ಕ ರೂ.') }} _____________</p>
+    <p style="margin: 4px 0; font-size: 9.5px;">{{ t('Payment Mode:', 'ನಗದು/ಚೆಕ್/ಡಿ.ಡಿ./RTGS/NEFT') }} ________________ {{ t("Introducer's Signature:", 'ಪರಿಚಯಿಸಿದವರ ಸಹಿ:') }} ________________</p>
+    
+    <p style="margin-top: 10px; font-size: 8.5px; font-weight: bold; text-align: center;">
+        {{ t('Note: Membership can also be obtained online at www.veerashaivamahasabha.org/in', 'ವಿ.ಸೂ. : ಸದಸ್ಯತ್ವವನ್ನು ಮಹಾಸಭೆಯ ಆನ್‌ಲೈನ್‌ನಲ್ಲಿಯೂ ಸಹ ಪಡೆಯಬಹುದಾಗಿದೆ. (www.veerashaivamahasabha.org/in)') }}
+    </p>
+
+</div>
+
+<script>
+    async function generatePDF() {
+        const btn = document.getElementById('download-btn');
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+        const element = document.getElementById('printable-content');
+        
+        // Settings for Perfect A4 fit
+        const opt = {
+            margin:       [4, 0, 4, 0], // Small top/bottom margin for safety
+            filename:     'Membership_{{ app.applicant_name | replace(" ", "_") }}.pdf',
+            image:        { type: 'jpeg', quality: 1.0 },
+            html2canvas:  { 
+                scale: 2.2, // Slightly reduced scale for better A4 fit
+                useCORS: true, 
+                letterRendering: true,
+                scrollX: 0,
+                scrollY: 0
+            },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        try {
+            // Ensure fonts are loaded before capturing
+            await document.fonts.ready;
+            await html2pdf().set(opt).from(element).save();
+        } catch (err) {
+            console.error('PDF Generation Error:', err);
+            alert('PDF generation failed. Please try printing via Browser (CTRL+P)');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    }
+</script>
+</body>
+</html>

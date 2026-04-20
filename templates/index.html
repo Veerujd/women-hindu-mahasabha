@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Akhila Bharata Veerashaiva Mahasabha (AIVMM) | Official Redesign{% endblock %}
+{% block title %}Akhila Bharata Veerashaiva Mahila Mahasabha (AIVMM) | Official Redesign{% endblock %}
 
 {% block ribbon %}
 <!-- Leadership Ribbon -->
@@ -11,9 +11,12 @@
             <div class="ribbon-img-wrapper">
                 <img class="primary" src="{{ url_for('static', filename='img/images/jagadguru-renukacharya.webp') }}"
                     alt="Adi Jagadguru Shri Renukacharya" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/images/prabhakar-kore.webp') }}"
+                    alt="Prabhakar Kore" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>Adi Jagadguru</strong><span>Shri Renukacharya</span></div>
+                <div class="info-secondary"><strong>Vice President</strong><span>Prabhakar Kore</span></div>
             </div>
         </div>
 
@@ -22,9 +25,12 @@
             <div class="ribbon-img-wrapper">
                 <img class="primary" src="{{ url_for('static', filename='img/images/vishwaguru-basavanna.webp') }}"
                     alt="Jagajyoti Vishwaguru" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/images/as-veeranna.webp') }}"
+                    alt="A.S. Veeranna" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>Jagajyoti Vishwaguru</strong><span>Basaveshwara</span></div>
+                <div class="info-secondary"><strong>Vice President</strong><span>A.S. Veeranna</span></div>
             </div>
         </div>
 
@@ -34,9 +40,12 @@
                 <img class="primary"
                     src="{{ url_for('static', filename='img/images/shivayogi-hanagal-kumarswamy.webp') }}"
                     alt="Hanagal Shri Kumara" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/presidents/p1.webp') }}"
+                    alt="Guramma Siddareddy" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>Hanagal</strong><span>Shri Kumara Shivayogi</span></div>
+                <div class="info-secondary"><strong>Vice President</strong><span>Guramma Siddareddy</span></div>
             </div>
         </div>
 
@@ -45,9 +54,12 @@
             <div class="ribbon-img-wrapper">
                 <img class="primary" src="{{ url_for('static', filename='img/images/eshwar-kandre.webp') }}"
                     alt="National President" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/presidents/p2.webp') }}"
+                    alt="Anaberu Rajanna" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>National President</strong><span>Shri Eshwar Khandre</span></div>
+                <div class="info-secondary"><strong>Vice President</strong><span>Anaberu Rajanna</span></div>
             </div>
         </div>
 
@@ -56,9 +68,12 @@
             <div class="ribbon-img-wrapper">
                 <img class="primary" src="{{ url_for('static', filename='img/images/bheemanna-kandre.webp') }}"
                     alt="Honorary President" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/presidents/p4.webp') }}"
+                    alt="Shankar Bidari" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>Honorary President</strong><span>Dr. Bheemanna Khandre</span></div>
+                <div class="info-secondary"><strong>Secretary</strong><span>Shankar Bidari</span></div>
             </div>
         </div>
 
@@ -67,9 +82,12 @@
             <div class="ribbon-img-wrapper">
                 <img class="primary" src="{{ url_for('static', filename='img/images/veena-kashappanavar.webp') }}"
                     alt="Women's Wing President" loading="lazy">
+                <img class="secondary" src="{{ url_for('static', filename='img/presidents/p5.webp') }}"
+                    alt="Venkataraddy Mudnal" loading="lazy">
             </div>
             <div class="ribbon-info">
                 <div class="info-primary"><strong>Women's Wing President</strong><span>Veena Kashappanavar</span></div>
+                <div class="info-secondary"><strong>Secretary</strong><span>Venkataraddy Mudnal</span></div>
             </div>
         </div>
     </div>
@@ -253,7 +271,7 @@
 </section>
 
 <!-- Our Leaders Sync Section -->
-<section class="section-padding our-leaders-section" style="background: var(--bg-color);">
+<section class="section-padding our-leaders-section">
     <div class="container">
         <div class="section-header text-center" data-aos>
             <div class="badge">LEADERSHIP</div>
@@ -261,56 +279,94 @@
             <p>Guiding the community with unwavering devotion and robust vision.</p>
         </div>
 
-        <!-- Top Slider: 5 Leaders -->
-        <div class="leaders-slider-container" data-aos>
-            <button class="slider-btn prev-leader-btn"><i class="fas fa-chevron-left"></i></button>
-            <div class="leaders-slider-track-wrap">
-                <div class="leaders-slider-track" id="leadersTrack">
-                    <div class="leader-card active" data-leader-index="0">
-                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p1.webp') }}"
-                            alt="Leader 1">
-                        <h4>Sri B.S. Yediyurappa</h4>
-                        <span>Chief Patron</span>
-                    </div>
-                    <div class="leader-card" data-leader-index="1">
-                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p2.webp') }}"
-                            alt="Leader 2">
-                        <h4>Sri Basavaraj Bommai</h4>
-                        <span>Co-Patron</span>
-                    </div>
-                    <div class="leader-card" data-leader-index="2">
-                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p3.webp') }}"
-                            alt="Leader 3">
-                        <h4>Sri Jagadish Shettar</h4>
-                        <span>Senior Advisor</span>
-                    </div>
-                    <div class="leader-card" data-leader-index="3">
-                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p4.webp') }}"
-                            alt="Leader 4">
-                        <h4>Dr. S. S. Badrinath</h4>
-                        <span>Honorary President</span>
-                    </div>
-                    <div class="leader-card" data-leader-index="4">
-                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p5.webp') }}"
-                            alt="Leader 5">
-                        <h4>Sri V. Somanna</h4>
-                        <span>Executive Member</span>
+        <!-- Leadership Hierarchy -->
+        <div class="leadership-hierarchy" data-aos="fade-up">
+            <!-- President Row -->
+            <div class="leader-rank-group president-group">
+                <h3 class="leader-rank-title">National Leadership</h3>
+                <div class="leaders-grid president-row-grid">
+
+                    <div class="leader-card rank-president">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/images/veena-kashappanavar.webp') }}"
+                            alt="Veena Kashappanavar">
+                        <h4>Smt. Veena Kashappanavar</h4>
+                        <span>Women's Wing President</span>
                     </div>
                 </div>
             </div>
-            <button class="slider-btn next-leader-btn"><i class="fas fa-chevron-right"></i></button>
 
-            <!-- Slider Dots -->
-            <div class="leader-dots" id="leaderDots"></div>
-        </div>
+            <!-- Vice Presidents -->
+            <div class="leader-rank-group vp-group">
+                <h3 class="leader-rank-title">Vice Presidents</h3>
+                <div class="leaders-grid rank-vp-grid">
+                    <div class="leader-card rank-vp">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/images/prabhakar-kore.webp') }}"
+                            alt="Prabhakar Kore">
+                        <h4>Prabhakar Kore</h4>
+                        <span>Vice President</span>
+                    </div>
+                    <div class="leader-card rank-vp">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/images/as-veeranna.webp') }}"
+                            alt="A.S. Veeranna">
+                        <h4>A.S. Veeranna</h4>
+                        <span>Vice President</span>
+                    </div>
+                    <div class="leader-card rank-vp">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p1.webp') }}"
+                            alt="Guramma Siddareddy">
+                        <h4>Guramma Siddareddy</h4>
+                        <span>Vice President</span>
+                    </div>
+                    <div class="leader-card rank-vp">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p2.webp') }}"
+                            alt="Anaberu Rajanna">
+                        <h4>Anaberu Rajanna</h4>
+                        <span>Vice President</span>
+                    </div>
+                    <div class="leader-card rank-vp">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p3.webp') }}"
+                            alt="Baburao Thumba">
+                        <h4>Baburao Thumba</h4>
+                        <span>Vice President</span>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Bottom Row: Office Bearers (Synced) -->
-        <div class="office-bearers-container" data-aos>
-            <h3 class="text-center ob-title">Office Bearers</h3>
-
-            <!-- Dynamic Grid 8 members loaded via JS -->
-            <div class="office-bearers-grid" id="officeBearersGrid">
-                <!-- Populated by JS -->
+            <!-- Secretaries -->
+            <div class="leader-rank-group secretary-group">
+                <h3 class="leader-rank-title">Secretaries</h3>
+                <div class="leaders-grid rank-sec-grid">
+                    <div class="leader-card rank-sec">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p4.webp') }}"
+                            alt="Shankar Bidari">
+                        <h4>Shankar Bidari</h4>
+                        <span>Secretary</span>
+                    </div>
+                    <div class="leader-card rank-sec">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p5.webp') }}"
+                            alt="Venkataraddy Mudnal">
+                        <h4>Venkataraddy Mudnal</h4>
+                        <span>Secretary</span>
+                    </div>
+                    <div class="leader-card rank-sec">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p6.webp') }}"
+                            alt="B.S. Sachidananda Murthy">
+                        <h4>B.S. Murthy</h4>
+                        <span>Secretary</span>
+                    </div>
+                    <div class="leader-card rank-sec">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p7.webp') }}"
+                            alt="Veeranna Charanthimath">
+                        <h4>V. Charanthimath</h4>
+                        <span>Secretary</span>
+                    </div>
+                    <div class="leader-card rank-sec">
+                        <img loading="lazy" src="{{ url_for('static', filename='img/presidents/p8.webp') }}"
+                            alt="S.S. Ganesh">
+                        <h4>S.S. Ganesh</h4>
+                        <span>Secretary</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

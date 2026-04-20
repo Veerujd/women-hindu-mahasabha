@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}</title>
+    <title>{% block title %}Akhila Bharata Veerashaiva Mahila Mahasabha (AIVMM){% endblock %}</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='img/logo.jpg') }}">
@@ -16,7 +16,7 @@
     <!-- Meta Tags -->
     {% block meta %}
     <meta name="description"
-        content="Official website of Akhila Bharata Veerashaiva Mahasabha (AIVMM). Preserving tradition, empowering the community, and building a stronger future through cultural heritage and unity.">
+        content="Official website of Akhila Bharata Veerashaiva Mahila Mahasabha (AIVMM). Preserving tradition, empowering the community, and building a stronger future through cultural heritage and unity.">
     <meta name="keywords"
         content="AIVMM, Veerashaiva Mahasabha, Hindu community, Spiritual, Tradition, Community empowerment, Bangalore, Veerashaiva Lingayath">
     <link rel="canonical" href="https://aivmm.rndvg.com/">
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     {% block extra_css %}{% endblock %}
+    {% block extra_head %}{% endblock %}
 </head>
 
 <body class="sacred-pattern {% block body_class %}{% endblock %}">
@@ -70,8 +71,8 @@
             <a href="{{ url_for('web.index') }}" class="logo-container">
                 <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="AIVMM Logo" loading="lazy">
                 <div class="logo-text">
-                    <h1 class="eng-name">All India Veerashaiva Mahasabha</h1>
-                    <h1 class="kan-name">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಾಸಭಾ</h1>
+                    <h1 class="eng-name">All India Veerashaiva Mahila Mahasabha</h1>
+                    <h1 class="kan-name">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭಾ</h1>
                 </div>
             </a>
             <nav id="main-nav">
@@ -100,11 +101,11 @@
             <div class="footer-logo">
                 <div class="logo-text">
                     <h1 class="eng-name" style="color: var(--secondary-color); font-size: 1.5rem; text-shadow: none;">
-                        All India Veerashaiva Mahasabha</h1>
+                        All India Veerashaiva Mahila Mahasabha</h1>
                     <h1 class="kan-name" style="color: var(--text-muted); font-size: 0.88rem; text-shadow: none;">ಅಖಿಲ
-                        ಭಾರತ ವೀರಶೈವ ಮಹಾಸಭಾ</h1>
+                        ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭಾ</h1>
                 </div>
-                <p>Akhila Bharata Veerashaiva Mahasabha. Preserving divine tradition, empowering our community, and
+                <p>Akhila Bharata Veerashaiva Mahila Mahasabha. Preserving divine tradition, empowering our community, and
                     building a resilient future through cultural excellence.</p>
                 <div class="social-links-footer">
                     <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -146,7 +147,7 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 Akhila Bharata Veerashaiva Mahasabha. All Rights Reserved.</p>
+                <p>&copy; 2026 Akhila Bharata Veerashaiva Mahila Mahasabha. All Rights Reserved.</p>
             </div>
         </div>
     </footer>

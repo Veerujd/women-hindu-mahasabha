@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Apply for Membership | Akhila Bharata Veerashaiva Mahasabha{% endblock %}
+{% block title %}Apply for Membership | Akhila Bharata Veerashaiva Mahila Mahasabha{% endblock %}
 
 {% block extra_head %}
 <!-- PDF Generation Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/html2pdf.bundle.min.js') }}"></script>
 {% endblock %}
 
 {% block extra_css %}
@@ -728,14 +728,16 @@
 
 <div class="membership-container">
     
-    <!-- Language Toggle -->
+    <!-- Language Selection Dropdown -->
     <div class="language-toggle-wrapper" data-aos="fade-up">
-        <span class="lang-label label-kn active">ಕನ್ನಡ</span>
-        <label class="switch">
-            <input type="checkbox" id="langToggle">
-            <span class="slider"></span>
-        </label>
-        <span class="lang-label label-en">English</span>
+        <i class="fas fa-language" style="color: var(--primary-color, #f97316); font-size: 1.5rem; margin-right: 8px;"></i>
+        <select id="langSelect" class="form-control-minimal" style="width: auto; padding: 6px 15px; border-radius: 8px; border: 2px solid var(--primary-color, #f97316); font-weight: 700; color: #334155; font-size: 1.05rem; cursor: pointer; outline: none; background: #fffdf5;">
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="en">English</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="hi">हिंदी (Hindi)</option>
+        </select>
     </div>
 
     <div class="form-card" data-aos="fade-up" data-aos-delay="100">
@@ -831,7 +833,7 @@
                 <div class="grid-row">
                     <div class="grid-label lang-text" data-en="Applicant Name" data-kn="ಅರ್ಜಿದಾರರ ಹೆಸರು">ಅರ್ಜಿದಾರರ ಹೆಸರು</div>
                     <div class="grid-input">
-                        <input type="text" name="applicantName" class="form-control-minimal" required>
+                        <input type="text" name="applicantName" class="form-control-minimal" placeholder="Enter Full Name" required>
                     </div>
                 </div>
 
@@ -852,7 +854,7 @@
                 <div class="grid-row">
                     <div class="grid-label lang-text" data-en="Father/Husband Name" data-kn="ತಂದೆ/ಗಂಡನ ಹೆಸರು">ತಂದೆ/ಗಂಡನ ಹೆಸರು</div>
                     <div class="grid-input">
-                        <input type="text" name="fatherHusbandName" class="form-control-minimal" required>
+                        <input type="text" name="fatherHusbandName" class="form-control-minimal" placeholder="Enter Father/Husband's Name" required>
                     </div>
                 </div>
 
@@ -860,13 +862,13 @@
                 <div class="grid-row">
                     <div class="grid-label lang-text" data-en="Mother's Name" data-kn="ತಾಯಿಯ ಹೆಸರು">ತಾಯಿಯ ಹೆಸರು</div>
                     <div class="grid-input">
-                        <input type="text" name="motherName" class="form-control-minimal" required>
+                        <input type="text" name="motherName" class="form-control-minimal" placeholder="Enter Mother's Name" required>
                     </div>
                 </div>
 
                 <!-- DOB & Gender -->
                 <div class="grid-row">
-                    <div class="grid-label lang-text" data-en="Date of Birth & Gender" data-kn="ಹುಟ್ಟಿದ ದಿನಾಂಕ ಮತ್ತು ಲಿಂಗ">ಹುಟ್ಟಿದ ದಿನಾಂಕ ಮತ್ತು ಲಿಂಗ</div>
+                    <div class="grid-label lang-text" data-en="Date of Birth, Gender & Blood Group" data-kn="ಹುಟ್ಟಿದ ದಿನಾಂಕ, ಲಿಂಗ ಮತ್ತು ರಕ್ತದ ಗುಂಪು">ಹುಟ್ಟಿದ ದಿನಾಂಕ, ಲಿಂಗ ಮತ್ತು ರಕ್ತದ ಗುಂಪು</div>
                     <div class="grid-input multi-col-input">
                         <div class="field-combo">
                             <input type="date" name="dob" class="form-control-minimal" style="border: 1px solid #cbd5e1; padding: 5px; border-radius: 4px;" required>
@@ -882,6 +884,17 @@
                                 <input type="radio" name="gender" value="Male" required> 
                                 <span class="lang-text" data-en="Male" data-kn="ಗಂಡು">ಗಂಡು</span>
                             </label>
+                        </div>
+                        <div style="width: 1px; height: 30px; background: #cbd5e1; margin: 0 10px;"></div>
+                        <div class="field-combo">
+                            <strong class="lang-text" style="color:#64748b; margin-right:5px;" data-en="Blood Group:" data-kn="ರಕ್ತದ ಗುಂಪು:">ರಕ್ತದ ಗುಂಪು:</strong>
+                            <select name="bloodGroup" class="form-control-minimal" style="padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;" required>
+                                <option value="">-</option>
+                                <option value="A+">A+</option><option value="A-">A-</option>
+                                <option value="B+">B+</option><option value="B-">B-</option>
+                                <option value="O+">O+</option><option value="O-">O-</option>
+                                <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -908,28 +921,35 @@
                     <div class="grid-input multi-col-input">
                         <div class="field-combo" style="flex:1;">
                             <span class="lang-text" style="color:#64748b; font-size: 0.9em; font-weight:700;" data-en="Edu:" data-kn="ವಿ:">ವಿ:</span>
-                            <input type="text" name="education" class="form-control-minimal" required>
+                            <input type="text" name="education" class="form-control-minimal" placeholder="E.g., Degree" required>
                         </div>
                         <div style="width: 1px; height: 30px; background: #cbd5e1; margin: 0 10px;"></div>
                         <div class="field-combo" style="flex:1;">
                             <span class="lang-text" style="color:#64748b; font-size: 0.9em; font-weight:700;" data-en="Occ:" data-kn="ಉದ್ಯೋಗ:">ಉದ್ಯೋಗ:</span>
-                            <input type="text" name="occupation" class="form-control-minimal" required>
+                            <input type="text" name="occupation" class="form-control-minimal" placeholder="E.g., Business" required>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phone & Email -->
+                <!-- Mobile Number -->
                 <div class="grid-row">
-                    <div class="grid-label lang-text" data-en="Telephone/Mobile & Email" data-kn="ದೂರವಾಣಿ/ಜಂಗಮವಾಣಿ ಮತ್ತು ಇ-ಮೇಲ್">ದೂರವಾಣಿ/ಜಂಗಮವಾಣಿ ಮತ್ತು ಇ-ಮೇಲ್</div>
-                    <div class="grid-input multi-col-input">
-                        <div class="field-combo" style="flex:1;">
-                            <i class="fas fa-phone-alt" style="color:#64748b; font-size: 0.9em;"></i>
-                            <input type="tel" name="phone" id="phoneInput" class="form-control-minimal" maxlength="10" required>
+                    <div class="grid-label lang-text" data-en="Mobile Number" data-kn="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ">ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</div>
+                    <div class="grid-input">
+                        <div class="field-combo" style="flex:1; display:flex; align-items:center; padding: 5px 0;">
+                            <i class="fas fa-mobile-alt" style="color:#64748b; font-size: 1.1em; padding: 0 10px;"></i>
+                            <span class="lang-text" style="color:#64748b; font-weight:600; padding-right: 10px;" data-en="+91" data-kn="+91">+91</span>
+                            <input type="tel" name="mobile" id="mobileNumberInput" class="form-control-minimal" maxlength="10" pattern="\d{10}" placeholder="10-digit mobile number" required>
                         </div>
-                        <div style="width: 1px; height: 30px; background: #cbd5e1; margin: 0 10px;"></div>
-                        <div class="field-combo" style="flex:1;">
-                            <i class="fas fa-envelope" style="color:#64748b; font-size: 0.9em;"></i>
-                            <input type="email" name="email" class="form-control-minimal" required>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="grid-row">
+                    <div class="grid-label lang-text" data-en="Email Address" data-kn="ಇ-ಮೇಲ್ ವಿಳಾಸ">ಇ-ಮೇಲ್ ವಿಳಾಸ</div>
+                    <div class="grid-input">
+                        <div class="field-combo" style="display:flex; align-items:center;">
+                            <i class="fas fa-envelope" style="color:#64748b; font-size: 1.1em; padding: 0 10px;"></i>
+                            <input type="email" name="email" class="form-control-minimal" placeholder="E.g., user@example.com" required>
                         </div>
                     </div>
                 </div>
@@ -939,18 +959,34 @@
                     <div class="grid-label lang-text" data-en="Address" data-kn="ವಿಳಾಸ">ವಿಳಾಸ</div>
                     <div class="grid-input">
                         <textarea name="address" class="address-areatextarea" rows="2" required></textarea>
-                        <div class="multi-col-input" style="gap: 15px;">
+                        <!-- Row 1: State and Pincode -->
+                        <div class="multi-col-input" style="gap: 15px; margin-top: 10px;">
                             <div class="field-combo" style="flex:1; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px;">
-                                <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="Taluk:" data-kn="ತಾ||:">ತಾ||:</span>
-                                <input type="text" name="taluk" class="form-control-minimal" required>
+                                <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="State:" data-kn="ರಾಜ್ಯ:">ರಾಜ್ಯ:</span>
+                                <select name="state" id="stateSelect" class="form-control-minimal" required style="outline: none;">
+                                    <option value="Karnataka" selected>Karnataka (ಕರ್ನಾಟಕ)</option>
+                                    <option value="Tamil Nadu">Tamil Nadu (ತಮಿಳುನಾಡು)</option>
+                                    <option value="Kerala">Kerala (ಕೇರಳ)</option>
+                                    <option value="Maharashtra">Maharashtra (ಮಹಾರಾಷ್ಟ್ರ)</option>
+                                </select>
                             </div>
+                            <div class="field-combo" style="flex:1; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px;">
+                                <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="PIN:" data-kn="ಪಿನ್‌ಕೋಡ್:">ಪಿನ್‌ಕೋಡ್:</span>
+                                <input type="text" name="pincode" id="pincodeInput" maxlength="6" pattern="\d{6}" class="form-control-minimal" placeholder="6-digit PIN" required>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: District and Taluk -->
+                        <div class="multi-col-input" style="gap: 15px; margin-top: 10px;">
                             <div class="field-combo" style="flex:1; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px;">
                                 <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="Dist:" data-kn="ಜಿ :">ಜಿ :</span>
-                                <input type="text" name="district" class="form-control-minimal" required>
+                                <input type="text" name="district" id="districtInput" list="districtList" class="form-control-minimal" placeholder="Select or type District" required autocomplete="off">
+                                <datalist id="districtList"></datalist>
                             </div>
-                            <div class="field-combo" style="flex:0.8; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px;">
-                                <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="PIN:" data-kn="ಪಿನ್‌ಕೋಡ್:">ಪಿನ್‌ಕೋಡ್:</span>
-                                <input type="text" name="pincode" maxlength="6" class="form-control-minimal" required>
+                            <div class="field-combo" style="flex:1; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px;">
+                                <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="Taluk:" data-kn="ತಾ||:">ತಾ||:</span>
+                                <input type="text" name="taluk" id="talukInput" list="talukList" class="form-control-minimal" placeholder="Select or type Taluk" required autocomplete="off">
+                                <datalist id="talukList"></datalist>
                             </div>
                         </div>
                     </div>
@@ -962,18 +998,15 @@
                 <div class="grid-row">
                     <div class="grid-label lang-text" data-en="Payment Details" data-kn="ಪಾವತಿ ವಿವರ">ಪಾವತಿ ವಿವರ</div>
                     <div class="grid-input" style="background:#fdfaf6;">
-                        <div class="multi-col-input" style="margin-bottom: 10px;">
-                            <div class="field-combo" style="flex:2;">
+                        <div class="multi-col-input" style="flex-direction: column; gap: 15px; margin-bottom: 10px;">
+                            <!-- 1. D.D. No. -->
+                            <div class="field-combo" style="width: 100%;">
                                 <span class="lang-text" style="color:#64748b; font-size:0.85em; font-weight:600;" data-en="D.D./RTGS/NEFT/Q.R.CODE No:" data-kn="ಡಿ.ಡಿ./RTGS/NEFT/ Q.R.CODE No:">ಡಿ.ಡಿ./RTGS/NEFT/ Q.R.CODE No:</span>
-                                <input type="text" name="paymentRef" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;">
+                                <input type="text" name="paymentRef" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;" placeholder="Transaction ID or Cheque No">
                             </div>
-                            <div class="field-combo" style="flex:1;">
-                                <span class="lang-text" style="color:#64748b; font-size:0.85em; font-weight:600;" data-en="Rs:" data-kn="ರೂ.">ರೂ.</span>
-                                <input type="number" name="paymentAmount" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;" required id="feeAmount">
-                            </div>
-                        </div>
-                        <div class="multi-col-input">
-                            <div class="field-combo" style="flex:1;">
+                            
+                            <!-- 2. Classification -->
+                            <div class="field-combo" style="width: 100%;">
                                 <span class="lang-text" style="color:#64748b; font-size:0.85em; font-weight:600;" data-en="Classification:" data-kn="ವರ್ಗೀಕರಣ:">ವರ್ಗೀಕರಣ:</span>
                                 <select name="classification" id="classificationSelect" class="form-control-minimal" style="border-bottom:1px solid #cbd5e1;" required>
                                     <option value="" class="lang-text" data-en="-- Select --" data-kn="-- ಆಯ್ಕೆಮಾಡಿ --">-- ಆಯ್ಕೆಮಾಡಿ --</option>
@@ -989,11 +1022,39 @@
                                     <option value="Institutional" data-amount="" class="lang-text" data-en="Institutional" data-kn="ಸಂಸ್ಥೆಗಳು">ಸಂಸ್ಥೆಗಳು</option>
                                 </select>
                             </div>
-                            <div class="field-combo" style="flex:1;">
+
+                            <!-- 3. Rupees -->
+                            <div class="field-combo" style="width: 100%;">
+                                <span class="lang-text" style="color:#64748b; font-size:0.85em; font-weight:600;" data-en="Rs:" data-kn="ರೂ.">ರೂ.</span>
+                                <input type="number" name="paymentAmount" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;" required id="feeAmount" placeholder="Auto-filled amount">
+                            </div>
+
+                            <!-- 4. Project/Program -->
+                            <div class="field-combo" style="width: 100%;">
                                 <span class="lang-text" style="color:#64748b; font-size:0.85em; font-weight:600;" data-en="Project/Program:" data-kn="ನಿರ್ದಿಷ್ಟ ಯೋಜನೆ/ಕಾರ್ಯಕ್ರಮಕ್ಕಾಗಿ:">ನಿರ್ದಿಷ್ಟ ಯೋಜನೆ/ಕಾರ್ಯಕ್ರಮಕ್ಕಾಗಿ:</span>
-                                <input type="text" name="specificProject" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;">
+                                <input type="text" name="specificProject" class="form-control-minimal" style="border-bottom: 1px solid #cbd5e1;" placeholder="Optional Project Name">
                             </div>
                         </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const classSelect = document.getElementById('classificationSelect');
+                                const feeInp = document.getElementById('feeAmount');
+                                if (classSelect && feeInp) {
+                                    classSelect.addEventListener('change', function() {
+                                        const selectedOption = this.options[this.selectedIndex];
+                                        const amount = selectedOption.getAttribute('data-amount');
+                                        if (amount !== null && amount !== "") {
+                                            feeInp.value = amount;
+                                            feeInp.style.backgroundColor = "#ecfdf5";
+                                            setTimeout(() => feeInp.style.backgroundColor = "transparent", 800);
+                                        } else {
+                                            feeInp.value = '';
+                                        }
+                                    });
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -1034,11 +1095,11 @@
                 <div class="multi-col-input">
                     <div class="field-combo" style="flex:2;">
                         <span class="lang-text" style="color:#475569; font-weight:700;" data-en="Introducer Name:" data-kn="ಪ್ರೋತ್ಸಾಹ ನೀಡಿದವರ ಹೆಸರು :">ಪ್ರೋತ್ಸಾಹ ನೀಡಿದವರ ಹೆಸರು :</span>
-                        <input type="text" name="introducerName" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;">
+                        <input type="text" name="introducerName" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;" placeholder="Full Name">
                     </div>
                     <div class="field-combo" style="flex:1;">
                         <span class="lang-text" style="color:#475569; font-weight:700;" data-en="Membership No:" data-kn="ಸದಸ್ಯತ್ವದ ಸಂಖ್ಯೆ:">ಸದಸ್ಯತ್ವದ ಸಂಖ್ಯೆ:</span>
-                        <input type="text" name="introducerMemNo" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;">
+                        <input type="text" name="introducerMemNo" class="form-control-minimal" style="border-bottom: 2px dashed #94a3b8; padding: 4px 0;" placeholder="Member ID">
                     </div>
                 </div>
             </div>
@@ -1077,7 +1138,6 @@
                                 <th class="lang-text" data-en="Relation" data-kn="ಸಂಬಂಧ" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಸಂಬಂಧ</th>
                                 <th class="lang-text" data-en="Full Name" data-kn="ಪೂರ್ಣ ಹೆಸರು" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಪೂರ್ಣ ಹೆಸರು</th>
                                 <th class="lang-text" data-en="Mobile Number" data-kn="ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left;">ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</th>
-                                <th class="lang-text" data-en="Blood Group" data-kn="ರಕ್ತದ ಗುಂಪು" style="padding: 12px; border: 1px solid #cbd5e1; text-align: left; width: 120px;">ರಕ್ತದ ಗುಂಪು</th>
                             </tr>
                         </thead>
                         <tbody id="familyMembersBody">
@@ -1121,18 +1181,15 @@
         <div style="width: 80px; height: 80px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px;">
             <i class="fas fa-check-circle"></i>
         </div>
-        <h2 class="lang-text" data-en="Success!" data-kn="ಯಶಸ್ವಿಯಾಗಿದೆ!" style="color: #1e293b; margin-bottom: 5px;">Success!</h2>
-        <p class="lang-text" data-en="Welcome to Veerashaiva Mahasabha" data-kn="ವೀರಶೈವ ಮಹಾಸಭೆಗೆ ಸುಸ್ವಾಗತ" style="font-size: 1.1rem; color: #475569; font-weight: 600; margin-bottom: 20px;">
-            Welcome to Veerashaiva Mahasabha
+        <h2 class="lang-text" data-en="Success!" data-kn="ಯಶಸ್ವಿಯಾಗಿದೆ!" style="color: #1e293b; margin-bottom: 10px; font-size: 2.2rem;">Success!</h2>
+        <p class="lang-text" data-en="Welcome to Akhila Bharata Veerashaiva Mahila Mahasabha" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭೆಗೆ ಸುಸ್ವಾಗತ" style="font-size: 1.5rem; color: #f97316; font-weight: 700; margin-bottom: 25px; line-height: 1.4;">
+            Welcome to Akhila Bharata Veerashaiva Mahila Mahasabha
         </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
-            <button type="button" class="btn-apply" onclick="closeModalAndView()" style="width: 100%; padding: 10px 15px; background: #64748b; font-size: 0.9rem;">
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <button type="button" class="btn-apply" onclick="closeModalAndView()" style="width: 100%; padding: 12px 20px; background: #64748b; font-size: 1rem;">
                 <i class="fas fa-eye"></i> <span class="lang-text" data-en="View Application" data-kn="ಅರ್ಜಿಯನ್ನು ನೋಡಿ">View Application</span>
             </button>
-            <button type="button" class="btn-apply" onclick="printApplication()" style="width: 100%; padding: 10px 15px; background: #1e293b; font-size: 0.9rem;">
-                <i class="fas fa-print"></i> <span class="lang-text" data-en="Print Form" data-kn="ಅರ್ಜಿಯನ್ನು ಮುದ್ರಿಸಿ">Print Form</span>
-            </button>
-            <button type="button" class="btn-apply" onclick="downloadApplicationPDF()" style="grid-column: span 2; padding: 12px 20px;">
+            <button type="button" class="btn-apply" id="btnDownloadPDF" onclick="downloadApplicationPDF()" style="width: 100%; padding: 12px 20px; font-size: 1rem;">
                 <i class="fas fa-file-pdf"></i> <span class="lang-text" data-en="Download Application (PDF)" data-kn="ಅರ್ಜಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ (PDF)">Download Application (PDF)</span>
             </button>
         </div>
@@ -1147,21 +1204,21 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // === LANGUAGE TOGGLE LOGIC ===
-    const langToggle = document.getElementById('langToggle');
+    // === LANGUAGE SELECTION LOGIC ===
+    const langSelect = document.getElementById('langSelect');
     const langElements = document.querySelectorAll('.lang-text');
     let currentLang = 'kn';
 
     function updateLanguage() {
-        currentLang = langToggle.checked ? 'en' : 'kn';
-        
-        // Update labels
-        document.querySelector('.label-en').classList.toggle('active', currentLang === 'en');
-        document.querySelector('.label-kn').classList.toggle('active', currentLang === 'kn');
+        currentLang = langSelect.value;
 
         // Update all text elements
         langElements.forEach(el => {
-            const translation = el.getAttribute(`data-${currentLang}`);
+            let translation = el.getAttribute(`data-${currentLang}`);
+            if (!translation) {
+                // Fallback to English if translation for the selected language is not yet available
+                translation = el.getAttribute(`data-en`) || el.getAttribute(`data-kn`);
+            }
             if (!translation) return;
 
             if (el.tagName.toLowerCase() === 'option') {
@@ -1174,8 +1231,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    langToggle.addEventListener('change', updateLanguage);
-    updateLanguage(); // Initial run
+    if (langSelect) {
+        langSelect.addEventListener('change', updateLanguage);
+        updateLanguage(); // Initial run
+    }
 
     // === AADHAAR INPUT LOGIC ===
     const aadhaarInputs = document.querySelectorAll('.aadhaar-box');
@@ -1201,6 +1260,110 @@ document.addEventListener('DOMContentLoaded', () => {
         let val = '';
         aadhaarInputs.forEach(i => val += i.value);
         if (aadhaarHidden) aadhaarHidden.value = val;
+    }
+
+    // === DYNAMIC STATE, DISTRICT & TALUK API LOGIC ===
+    const stateSelect = document.getElementById('stateSelect');
+    const districtInput = document.getElementById('districtInput');
+    const districtList = document.getElementById('districtList');
+    const talukInput = document.getElementById('talukInput');
+    const talukList = document.getElementById('talukList');
+    const pincodeInput = document.getElementById('pincodeInput');
+    
+    // We fetch Indian states & districts from a public JSON Github repo
+    const DISTRICTS_API = 'https://raw.githubusercontent.com/sab99r/Indian-States-And-Districts/master/states-and-districts.json';
+    
+    let stateDistrictsMap = {};
+
+    async function loadDistrictsAPI() {
+        try {
+            const response = await fetch(DISTRICTS_API);
+            const data = await response.json();
+            // data.states is an array: { state: "Karnataka", districts: ["Bagalkot", ...] }
+            data.states.forEach(st => {
+                stateDistrictsMap[st.state] = st.districts;
+            });
+            updateDistricts();
+        } catch(err) {
+            console.error("Failed to fetch districts API", err);
+            // Fallback mock data if API fails
+            stateDistrictsMap['Karnataka'] = ['Bagalkot', 'Bengaluru Urban', 'Bengaluru Rural', 'Belagavi', 'Ballari', 'Bidar', 'Chamarajanagar', 'Chikkaballapur', 'Chikkamagaluru', 'Chitradurga', 'Dakshina Kannada', 'Davanagere', 'Dharwad', 'Gadag', 'Hassan', 'Haveri', 'Kalaburagi', 'Kodagu', 'Kolar', 'Koppal', 'Mandya', 'Mysuru', 'Raichur', 'Ramanagara', 'Shivamogga', 'Tumakuru', 'Udupi', 'Uttara Kannada', 'Vijayapura', 'Yadgir'];
+            updateDistricts();
+        }
+    }
+
+    function updateDistricts() {
+        const selectedState = stateSelect.value;
+        const dists = stateDistrictsMap[selectedState] || [];
+        districtList.innerHTML = dists.map(d => `<option value="${d}"></option>`).join('');
+    }
+
+    if (stateSelect) {
+        stateSelect.addEventListener('change', updateDistricts);
+        loadDistrictsAPI();
+    }
+
+    // Simulated API for Taluks (Mock DB)
+    const mockTalukDB = [
+        "Athani", "Bailhongal", "Belagavi", "Chikodi", "Gokak", "Hukkeri", "Khanapur", "Kittur", "Nippani", "Ramdurg", "Raybag", "Savadatti", // Belagavi
+        "Bengaluru North", "Bengaluru South", "Bengaluru East", "Anekal", "Yelahanka", // Bengaluru
+        "Hubballi", "Dharwad", "Kalghatgi", "Kundgol", "Navalgund", // Dharwad
+        "Mangaluru", "Bantwal", "Puttur", "Sullia", "Belthangady" // DK
+    ];
+
+    if (talukInput) {
+        talukInput.addEventListener('input', (e) => {
+            const searchStr = e.target.value.toLowerCase();
+            if (searchStr.length < 1) {
+                talukList.innerHTML = '';
+                return;
+            }
+            const matches = mockTalukDB
+                .filter(t => t.toLowerCase().includes(searchStr))
+                .sort((a,b) => a.localeCompare(b));
+                
+            talukList.innerHTML = matches.map(t => `<option value="${t}"></option>`).join('');
+        });
+    }
+
+    // Postal PIN API to auto-fill State, District, and Taluk
+    if (pincodeInput) {
+        pincodeInput.addEventListener('input', async (e) => {
+            const pin = e.target.value;
+            if (pin.length === 6 && /^\d{6}$/.test(pin)) {
+                try {
+                    const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                    const data = await res.json();
+                    if (data && data[0] && data[0].Status === 'Success') {
+                        const postOffices = data[0].PostOffice;
+                        const firstPO = postOffices[0];
+                        
+                        const dist = firstPO.District;
+                        const st = firstPO.State;
+                        const block = firstPO.Block;
+                        
+                        const stateOptions = Array.from(stateSelect.options);
+                        if(stateOptions.some(o => o.value === st)) {
+                            stateSelect.value = st;
+                            updateDistricts();
+                        }
+                        districtInput.value = dist;
+                        
+                        if (block && block.toLowerCase() !== "na") {
+                            talukInput.value = block;
+                        }
+                        
+                        // Populate datalist with unique blocks from this PIN
+                        const uniqueBlocks = [...new Set(postOffices.map(po => po.Block).filter(b => b && b.toLowerCase() !== "na"))];
+                        if (uniqueBlocks.length > 0) {
+                            talukList.innerHTML = uniqueBlocks.map(b => `<option value="${b}"></option>`).join('');
+                        }
+                    }
+                } catch(err) {
+                    console.log('Pin code lookup failed', err);
+                }
+            }
+        });
     }
 
     // === PHOTO PREVIEW & CAPTURE LOGIC ===
@@ -1288,8 +1451,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnNextStep) {
         btnNextStep.addEventListener('click', () => {
-            const inputsStep1 = step1.querySelectorAll('input[required], select[required]');
+            const inputsStep1 = step1.querySelectorAll('input[required], select[required], textarea[required]');
             let allValid = true;
+
+            // Custom Aadhaar Validation
+            const aadhaarHidden = document.getElementById('aadhaarHidden');
+            if (aadhaarHidden && aadhaarHidden.value.length !== 12) {
+                alert(currentLang === 'en' ? 'Aadhaar must be exactly 12 digits!' : 'ಆಧಾರ್ ಕಡ್ಡಾಯವಾಗಿ 12 ಅಂಕೆಗಳನ್ನು ಹೊಂದಿರಬೇಕು!');
+                allValid = false;
+                return;
+            }
+
+            // Custom Mobile Validation
+            const mobileInput = document.getElementById('mobileNumberInput');
+            if (mobileInput && (!mobileInput.value || mobileInput.value.length !== 10 || !/^\d{10}$/.test(mobileInput.value))) {
+                alert(currentLang === 'en' ? 'Mobile Number must be exactly 10 digits!' : 'ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಕಡ್ಡಾಯವಾಗಿ 10 ಅಂಕೆಗಳನ್ನು ಹೊಂದಿರಬೇಕು!');
+                allValid = false;
+                return;
+            }
+
             inputsStep1.forEach(input => {
                 if (!input.checkValidity()) {
                     input.reportValidity();
@@ -1321,7 +1501,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { label: 'Father/Husband', name: 'fatherHusbandName' },
             { label: 'DOB', name: 'dob' },
             { label: 'Education', name: 'education' },
-            { label: 'Phone', name: 'phone' }
+            { label: 'Mobile Number', name: 'mobile' },
+            { label: 'Email', name: 'email' }
         ];
         
         summaryContent.innerHTML = '';
@@ -1354,17 +1535,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td data-label="Relation" style="padding: 10px; border: 1px solid #cbd5e1;"><strong>${relation}</strong></td>
-            <td data-label="Full Name" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="text" name="family_name[]" value="${defaultName}" class="form-control-minimal" style="padding: 8px;"></td>
-            <td data-label="Mobile Number" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="tel" name="family_mobile[]" class="form-control-minimal" style="padding: 8px;" maxlength="10"></td>
-            <td data-label="Blood Group" style="padding: 10px; border: 1px solid #cbd5e1;">
-                <select name="family_blood[]" class="form-control-minimal" style="padding: 4px; border-bottom: 2px dashed #cbd5e1;">
-                    <option value="">-</option>
-                    <option value="A+">A+</option><option value="A-">A-</option>
-                    <option value="B+">B+</option><option value="B-">B-</option>
-                    <option value="O+">O+</option><option value="O-">O-</option>
-                    <option value="AB+">AB+</option><option value="AB-">AB-</option>
-                </select>
-            </td>
+            <td data-label="Full Name" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="text" name="family_name[]" value="${defaultName}" class="form-control-minimal" style="padding: 8px;" placeholder="Full Name"></td>
+            <td data-label="Mobile Number" style="padding: 10px; border: 1px solid #cbd5e1;"><input type="tel" name="family_mobile[]" class="form-control-minimal" style="padding: 8px;" maxlength="10" placeholder="10-digit"></td>
         `;
         familyMembersBody.appendChild(row);
     }
@@ -1388,39 +1560,70 @@ document.addEventListener('DOMContentLoaded', () => {
     // === DRAFT & SUBMIT LOGIC ===
     const form = document.getElementById('membershipForm');
     const btnDrafts = document.querySelectorAll('.btn-draft-action');
-    
     btnDrafts.forEach(btn => {
         btn.addEventListener('click', () => {
-            const formData = new FormData(form);
-            let data = {};
-            for (let [key, val] of formData.entries()) if (typeof val === 'string') data[key] = val;
-            
-            fetch('/api/save_draft', { method: 'POST', body: formData })
-                .then(() => {
-                    localStorage.setItem('membershipDraft', JSON.stringify(data));
-                    alert(currentLang === 'en' ? 'Draft saved!' : 'ಕರಡು ಉಳಿಸಲಾಗಿದೆ!');
-                });
+            try {
+                const formData = new FormData(form);
+                let data = {};
+                for (let [key, val] of formData.entries()) {
+                    if (typeof val === 'string') data[key] = val;
+                }
+                
+                // Save to browser cache (localStorage)
+                localStorage.setItem('membershipDraft', JSON.stringify(data));
+                alert(currentLang === 'en' ? 'Draft saved to browser cache!' : 'ಕರಡು ಬ್ರೌಸರ್ ಸಂಗ್ರಹಕ್ಕೆ ಉಳಿಸಲಾಗಿದೆ!');
+            } catch (err) {
+                console.error('Draft save failed:', err);
+                alert('Failed to save draft to cache.');
+            }
         });
     });
 
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            fetch('/api/submit_membership', { method: 'POST', body: new FormData(form) })
-                .then(() => {
+            const submitBtn = document.getElementById('btnFinalSubmit');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Submitting...';
+            }
+
+            try {
+                const formData = new FormData(form);
+                formData.append('submission_lang', currentLang); // Send the currently selected language
+
+                const res = await fetch('/api/submit_membership', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await res.json();
+
+                if (result.status === 'success') {
                     localStorage.removeItem('membershipDraft');
                     const modal = document.getElementById('successModal');
                     if (modal) {
+                        // Store the new ID for the download button
+                        window.submittedAppId = result.id;
                         modal.classList.add('show');
                     } else {
-                        alert(currentLang === 'en' ? 'Submitted!' : 'ಸಲ್ಲಿಸಲಾಗಿದೆ!');
+                        alert(currentLang === 'en' ? 'Submitted successfully!' : 'ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!');
                         window.location.href = '/membership';
                     }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert('Submission failed. Please try again.');
-                });
+                } else {
+                    alert('Error: ' + (result.message || 'Submission failed. Please try again.'));
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<span class="lang-text" data-en="Final Submit" data-kn="ಅಂತಿಮ ಸಲ್ಲಿಕೆ">Final Submit</span> <i class="fas fa-check" style="margin-left:8px;"></i>';
+                    }
+                }
+            } catch (err) {
+                console.error('Submission error:', err);
+                alert('Network error. Please check your connection and try again.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span class="lang-text" data-en="Final Submit" data-kn="ಅಂತಿಮ ಸಲ್ಲಿಕೆ">Final Submit</span> <i class="fas fa-check" style="margin-left:8px;"></i>';
+                }
+            }
         });
     }
 
@@ -1475,23 +1678,12 @@ window.printApplication = function() {
 };
 
 window.downloadApplicationPDF = function() {
-    const element = document.querySelector('.form-card');
-    const applicantName = document.querySelector('input[name="applicantName"]').value || 'Application';
-    const opt = {
-        margin:       0.2,
-        filename:     `Membership_${applicantName.replace(/\s+/g, '_')}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-
-    // Ensure both steps are captured
-    document.getElementById('step1').style.display = 'block';
-    document.getElementById('step2').style.display = 'block';
-    const subAreas = document.querySelectorAll('.submit-area');
-    subAreas.forEach(el => el.style.display = 'none');
-
-    html2pdf().set(opt).from(element).save();
+    if (window.submittedAppId) {
+        // Open the high-fidelity print view in a new tab
+        window.open(`/membership/print/${window.submittedAppId}`, '_blank');
+    } else {
+        alert("Application ID not found. Please try viewing the application instead.");
+    }
 };
 </script>
 {% endblock %}

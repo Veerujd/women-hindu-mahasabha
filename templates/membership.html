@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Membership | Akhila Bharata Veerashaiva Mahasabha (AIVMM){% endblock %}
+{% block title %}Membership | Akhila Bharata Veerashaiva Mahila Mahasabha (AIVMM){% endblock %}
 
 {% block content %}
 <!-- Page Hero (SYNCED WITH ABOUT PAGE) -->
@@ -14,12 +14,6 @@
 
 <div class="section-padding">
     <div class="container">
-        <!-- Extra Fees Section (ABOVE Membership Cards) -->
-        <div class="extra-fees-notce" data-aos="fade-up">
-            <i class="fas fa-info-circle"></i>
-            <p>One-time processing and entrance fee of <strong>₹ 100/-</strong> is required for all new registrations.
-            </p>
-        </div>
 
         <!-- Membership Categories Grid (12 Items - HORIZONTAL DECENT DESIGN) -->
         <div class="membership-grid-refined">
@@ -242,9 +236,11 @@
 
         </div>
 
-        <!-- Simple Apply Button (Decent & Clean) -->
         <div class="apply-footer-box section-padding text-center" data-aos="zoom-in">
-            <a href="{{ url_for('web.apply_membership') }}" class="btn btn-primary btn-lg">Apply for Membership</a>
+            <div style="display: inline-flex; justify-content: center; gap: 25px; padding: 30px 50px; background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 20px;">
+                <a href="{{ url_for('web.apply_membership') }}" class="btn btn-primary btn-lg">Apply for Membership</a>
+                <a href="{{ url_for('web.search_application') }}" class="btn btn-secondary btn-lg">Search Application</a>
+            </div>
         </div>
     </div>
 </div>

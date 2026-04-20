@@ -388,138 +388,10 @@ const initGallery = () => {
     }
 };
 
-// Synced Slider for Our Leaders & Office Bearers
-const initLeadersSlider = () => {
-    const track = document.getElementById('leadersTrack');
-    if (!track) return;
 
-    const cards = Array.from(track.querySelectorAll('.leader-card'));
-    const prevBtn = document.querySelector('.prev-leader-btn');
-    const nextBtn = document.querySelector('.next-leader-btn');
-    const obGrid = document.getElementById('officeBearersGrid');
-    
-    // Database of Office Bearers (8 per leader)
-    const officeBearersDB = [];
-    for(let i=0; i<5; i++) {
-        let members = [];
-        for(let j=0; j<8; j++) {
-            const picId = (i * 8 + j) % 20 + 1; // 20 placeholder images
-            members.push({
-                name: `Sri Committe Member ${i+1}-${j+1}`,
-                role: `Regional Secretary`,
-                img: `/static/img/presidents/p${picId}.webp`
-            });
-        }
-        officeBearersDB.push(members);
-    }
-
-    let activeLeaderIndex = 0;
-    let itemsPerView = 4;
-
-    const getItemsPerView = () => {
-        if(window.innerWidth <= 768) return 1;
-        if(window.innerWidth <= 1024) return 2;
-        return 4;
-    };
-
-    const updateSlider = () => {
-        itemsPerView = getItemsPerView();
-        const maxOffset = Math.max(0, cards.length - itemsPerView);
-        
-        if (activeLeaderIndex >= cards.length) activeLeaderIndex = cards.length - 1;
-        if (activeLeaderIndex < 0) activeLeaderIndex = 0;
-
-        let offsetIndex = activeLeaderIndex;
-        // Keep within slider track bounds
-        if (offsetIndex > maxOffset) offsetIndex = maxOffset; 
-        
-        const cardWidth = 100 / itemsPerView;
-        track.style.transform = `translateX(-${offsetIndex * cardWidth}%)`;
-
-        cards.forEach((c, idx) => {
-            if (idx === activeLeaderIndex) c.classList.add('active');
-            else c.classList.remove('active');
-        });
-
-        populateOfficeBearers(activeLeaderIndex);
-    };
-
-    const populateOfficeBearers = (leaderIndex) => {
-        obGrid.classList.remove('fade-in');
-        
-        setTimeout(() => {
-            obGrid.innerHTML = '';
-            const members = officeBearersDB[leaderIndex];
-            if(members) {
-                members.forEach(m => {
-                    obGrid.innerHTML += `
-                        <div class="ob-card">
-                            <img src="${m.img}" alt="${m.name}" loading="lazy">
-                            <h5>${m.name}</h5>
-                            <span>${m.role}</span>
-                        </div>
-                    `;
-                });
-            }
-            obGrid.classList.add('fade-in');
-        }, 300);
-    };
-
-    const startAutoSlide = () => {
-        clearInterval(track.autoSlide);
-        track.autoSlide = setInterval(() => {
-            activeLeaderIndex++;
-            if (activeLeaderIndex >= cards.length) {
-                activeLeaderIndex = 0; // Loop back to start
-            }
-            updateSlider();
-        }, 2000); // 2 second interval
-    };
-
-    const stopAutoSlide = () => clearInterval(track.autoSlide);
-
-    if(prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            if (activeLeaderIndex > 0) {
-                activeLeaderIndex--;
-                updateSlider();
-                startAutoSlide(); // reset timer on interaction
-            }
-        });
-    }
-
-    if(nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (activeLeaderIndex < cards.length - 1) {
-                activeLeaderIndex++;
-                updateSlider();
-                startAutoSlide(); // reset timer on interaction
-            }
-        });
-    }
-
-    cards.forEach((c, idx) => {
-        c.addEventListener('click', () => {
-            activeLeaderIndex = idx;
-            updateSlider();
-            startAutoSlide(); // reset timer on interaction
-        });
-    });
-
-    const leadersSection = document.querySelector('.our-leaders-section');
-    if (leadersSection) {
-        leadersSection.addEventListener('mouseenter', stopAutoSlide);
-        leadersSection.addEventListener('mouseleave', startAutoSlide);
-    }
-
-    window.addEventListener('resize', updateSlider);
-    updateSlider(); // render initial state
-    startAutoSlide(); // start the loop
-};
 
 document.addEventListener('DOMContentLoaded', () => {
     initGallery();
-    initLeadersSlider(); // Mount our new slider
     
     // Scroll to Top functionality
     const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -556,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
                 // Scroll back to summary start for better experience if content was long
                 setTimeout(() => {
-                    toggleBtn.closest('.founder-content-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    toggleBtn.closest('.founder-wrap-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 300);
             } else {
                 toggleBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';

@@ -1,8 +1,5 @@
-from flask import Flask
-from routes.web import web_bp
+from app import app
 
-app = Flask(__name__)
-app.register_blueprint(web_bp)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # The app is configured in app/__init__.py
     app.run(debug=True, port=5000)

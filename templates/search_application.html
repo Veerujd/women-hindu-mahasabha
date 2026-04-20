@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Search Application | Akhila Bharata Veerashaiva Mahila Mahasabha{% endblock %}
+
+{% block extra_css %}
+<style>
+    .search-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #e2e8f0;
+    }
+    .search-title {
+        color: #1e293b;
+        font-weight: 800;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 25px;
+    }
+    .form-label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #475569;
+    }
+    .aadhaar-input-container {
+        position: relative;
+    }
+    .aadhaar-input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+    }
+    .aadhaar-input:focus {
+        border-color: #ff9933;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.1);
+    }
+    .results-container {
+        margin-top: 40px;
+        display: none;
+    }
+    .app-record {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s ease;
+    }
+    .app-record:hover {
+        transform: translateY(-2px);
+    }
+    .app-info h4 {
+        margin: 0 0 5px 0;
+        color: #1e293b;
+    }
+    .app-info p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+    .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-top: 5px;
+    }
+    .status-submitted { background: #dcfce7; color: #15803d; }
+    .status-draft { background: #fef9c3; color: #854d0e; }
+    
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="page-hero section-padding">
+    <div class="container" data-aos="fade-up">
+        <div class="header-divider"></div>
+        <h2>Find Your Application</h2>
+        <p>Enter your 12-digit Aadhaar number to retrieve and download your membership form.</p>
+    </div>
+</section>
+
+<div class="section-padding">
+    <div class="container">
+        <div class="search-card" data-aos="fade-up">
+            <h3 class="search-title">Search by Aadhaar</h3>
+            
+            <form id="searchForm">
+                <div class="form-group">
+                    <label class="form-label">Aadhaar Number (12 Digits)</label>
+                    <div class="aadhaar-input-container">
+                        <input type="text" id="aadhaarInput" class="aadhaar-input" 
+                               maxlength="12" placeholder="0000 0000 0000" 
+                               pattern="\d{12}" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100" id="btnSearch">
+                    <i class="fas fa-search"></i> Search Now
+                </button>
+            </form>
+
+            <div class="loading-spinner" id="loader">
+                <i class="fas fa-circle-notch fa-spin fa-2x" style="color: #ff9933;"></i>
+                <p style="margin-top: 10px; color: #64748b;">Searching applications...</p>
+            </div>
+
+            <div class="results-container" id="results">
+                <h4 style="margin-bottom: 20px; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">
+                    Search Results
+                </h4>
+                <div id="resultsList"></div>
+            </div>
+
+            <div id="noResults" style="display: none; text-align: center; margin-top: 30px; color: #64748b;">
+                <i class="fas fa-search-minus fa-3x" style="margin-bottom: 15px; opacity: 0.3;"></i>
+                <p>No applications found for this Aadhaar number.</p>
+                <a href="{{ url_for('web.apply_membership') }}" class="btn btn-outline-primary" style="margin-top: 10px;">Apply New Membership</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('searchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const aadhaar = document.getElementById('aadhaarInput').value.trim();
+        if (aadhaar.length !== 12) {
+            alert('Please enter a valid 12-digit Aadhaar number.');
+            return;
+        }
+
+        const btn = document.getElementById('btnSearch');
+        const loader = document.getElementById('loader');
+        const results = document.getElementById('results');
+        const resultsList = document.getElementById('resultsList');
+        const noResults = document.getElementById('noResults');
+
+        btn.disabled = true;
+        loader.style.display = 'block';
+        results.style.display = 'none';
+        noResults.style.display = 'none';
+
+        try {
+            const response = await fetch('/api/search_membership', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ aadhaar: aadhaar })
+            });
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                if (data.count > 0) {
+                    resultsList.innerHTML = '';
+                    data.applications.forEach(app => {
+                        const row = document.createElement('div');
+                        row.className = 'app-record';
+                        row.innerHTML = `
+                            <div class="app-info">
+                                <h4>${app.applicant_name}</h4>
+                                <p><i class="far fa-calendar-alt"></i> ${app.application_date || 'N/A'}</p>
+                                <span class="status-badge status-${app.status}">${app.status}</span>
+                            </div>
+                            <a href="/membership/print/${app.id}" target="_blank" class="btn btn-sm btn-primary">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        `;
+                        resultsList.appendChild(row);
+                    });
+                    results.style.display = 'block';
+                } else {
+                    noResults.style.display = 'block';
+                }
+            } else {
+                alert('Error: ' + data.message);
+            }
+        } catch (err) {
+            console.error('Search error:', err);
+            alert('Network error. Please try again.');
+        } finally {
+            btn.disabled = false;
+            loader.style.display = 'none';
+        }
+    });
+
+    // Only allow numbers in Aadhaar input
+    document.getElementById('aadhaarInput').addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+</script>
+{% endblock %}

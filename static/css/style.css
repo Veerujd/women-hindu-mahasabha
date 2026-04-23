@@ -4139,7 +4139,7 @@ h6,
    OUR LEADERS SYNC SECTION
    ========================================================================== */
 .our-leaders-section {
-    padding: 40px 0;
+    padding: 20px 0;
     /* Reduced as requested */
     overflow: hidden;
     position: relative;
@@ -4182,6 +4182,16 @@ h6,
 .our-leaders-section .section-header h2,
 .our-leaders-section .section-header p {
     color: white !important;
+}
+
+.our-leaders-section .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.our-leaders-section .section-header p {
+    font-size: 0.9rem;
+    opacity: 0.85;
 }
 
 .our-leaders-section .section-header {
@@ -4228,12 +4238,12 @@ h6,
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 12px 45px;
+    padding: 8px 30px;
     border-radius: 50px;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 2rem; /* Increased size */
-    margin-bottom: 40px;
+    letter-spacing: 3px;
+    font-size: 1.4rem; /* Reduced size */
+    margin-bottom: 30px;
     font-family: var(--font-heading);
     position: relative;
     display: inline-block;
@@ -4251,6 +4261,26 @@ h6,
     background: var(--primary-color);
     box-shadow: 0 0 15px var(--primary-color);
     border-radius: 2px;
+}
+
+.unveiling-soon-container {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.unveiling-soon {
+    font-size: 1.25rem;
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 600;
 }
 
 .president-card {
@@ -6162,30 +6192,16 @@ body.body-scrolled .top-bar {
     color: var(--text-muted) !important;
 }
 
-/* Animated Toggle Info (Every 5s Blink) */
+/* Fixed Info (Removed Blink) */
 .leadership-ribbon .primary,
 .leadership-ribbon .info-primary {
-    animation: ribbonTogglePrimary 10s infinite !important;
     visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .leadership-ribbon .secondary,
 .leadership-ribbon .info-secondary {
-    animation: ribbonToggleSecondary 10s infinite !important;
-    visibility: visible !important;
-    opacity: 0; /* Default hidden */
-}
-
-@keyframes ribbonTogglePrimary {
-    0%, 46% { opacity: 1; }
-    48%, 98% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes ribbonToggleSecondary {
-    0%, 48% { opacity: 0; }
-    50%, 98% { opacity: 1; }
-    100% { opacity: 0; }
+    display: none !important;
 }
 
 .leadership-ribbon .ribbon-om-divider {
@@ -7228,9 +7244,12 @@ body.lightbox-open .top-bar {
 }
 
 .cal-days span.selected-day {
-    background: #7b4c53;
-    color: white;
-    box-shadow: 0 4px 10px rgba(123, 76, 83, 0.4);
+    background: var(--primary-color) !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255, 153, 51, 0.4);
+    transform: scale(1.1);
+    z-index: 2;
 }
 
 .cal-days span.event-day {

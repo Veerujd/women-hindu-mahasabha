@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Apply for Membership | Akhila Bharata Veerashaiva Mahila Mahasabha{% endblock %}
+{% block title %}Apply for Membership | Akhila Bharata Veerashaiva Lingayatha Mahila Mahasabha{% endblock %}
 
 {% block extra_head %}
 <!-- PDF Generation Library -->
@@ -665,11 +665,11 @@
     }
     .modal-content-success {
         background: white;
-        padding: 40px;
-        border-radius: 20px;
+        padding: 60px 40px;
+        border-radius: 24px;
         text-align: center;
-        max-width: 450px;
-        width: 90%;
+        max-width: 650px;
+        width: 95%;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         transform: scale(0.9);
         transition: transform 0.3s ease;
@@ -746,7 +746,7 @@
             <!-- Document Header -->
             <div class="form-doc-header">
                 <div class="header-logo">
-                    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="AIVMM Logo">
+                    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="AIVLMM Logo">
                 </div>
                 <div class="header-content">
                     <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; color: #4b5563; margin-bottom: 5px;">
@@ -754,8 +754,8 @@
                         <span>Reg.No.96/76-77</span>
                         <span>Date: 5-7-1976</span>
                     </div>
-                    <div class="maintitle lang-text" data-en="AKHILA BHARATA VEERASHAIVA LINGAYATA MAHASABHA (R.)" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)">
-                        ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ (ರಿ.)
+                    <div class="maintitle lang-text" data-en="AKHILA BHARATA VEERASHAIVA LINGAYATHA MAHILA MAHASABHA (R.)" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭಾ (ರಿ.)">
+                        ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭಾ (ರಿ.)
                     </div>
                     <div class="subtitle lang-text" data-en='No. 17/4, "Veerashaiva-Lingayata Bhavan", Ramana Maharshi Raste, Sadashivanagar, Bengaluru-560080' data-kn='ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080'>
                         ನಂ. 17/4, "ವೀರಶೈವ-ಲಿಂಗಾಯತ ಭವನ", ರಮಣಮಹರ್ಷಿರಸ್ತೆ, ಸದಾಶಿವನಗರ, ಬೆಂಗಳೂರು-560080
@@ -779,11 +779,11 @@
                     </div>
                     <div style="margin-top: 15px; max-width: 350px; margin-left: 40px;">
                         <strong class="lang-text" data-en="To The President," data-kn="ಅಧ್ಯಕ್ಷರಿಗೆ">ಅಧ್ಯಕ್ಷರಿಗೆ</strong><br>
-                        <span class="lang-text" data-en="Akhila Bharata Veerashaiva Lingayata Mahasabha (R.), Bengaluru" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು</span>
+                        <span class="lang-text" data-en="Akhila Bharata Veerashaiva Lingayatha Mahila Mahasabha (R.), Bengaluru" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು">ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭಾ(ರಿ.), ಬೆಂಗಳೂರು</span>
                     </div>
                 </div>
 
-                <div class="declaration lang-text" style="margin-left: 40px;" data-en="Sir, I agree to the rules and regulations of the Akhila Bharata Veerashaiva Lingayata Mahasabha and request you to grant me membership." data-kn="ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.">
+                <div class="declaration lang-text" style="margin-left: 40px;" data-en="Sir, I agree to the rules and regulations of the Akhila Bharata Veerashaiva Lingayatha Mahila Mahasabha and request you to grant me membership." data-kn="ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.">
                     ಮಾನ್ಯರೇ, ನಾನು ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಾಸಭೆಯ ನಿಯಮ, ನಿಬಂಧನೆಗಳಿಗೆ ಒಪ್ಪಿ ಸದಸ್ಯತ್ವ ನೀಡಲು ಕೋರುತ್ತೇನೆ.
                 </div>
 
@@ -965,6 +965,8 @@
                                 <span class="lang-text" style="color:#64748b; font-weight:600;" data-en="State:" data-kn="ರಾಜ್ಯ:">ರಾಜ್ಯ:</span>
                                 <select name="state" id="stateSelect" class="form-control-minimal" required style="outline: none;">
                                     <option value="Karnataka" selected>Karnataka (ಕರ್ನಾಟಕ)</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh (ಆಂಧ್ರಪ್ರದೇಶ)</option>
+                                    <option value="Telangana">Telangana (ತೆಲಂಗಾಣ)</option>
                                     <option value="Tamil Nadu">Tamil Nadu (ತಮಿಳುನಾಡು)</option>
                                     <option value="Kerala">Kerala (ಕೇರಳ)</option>
                                     <option value="Maharashtra">Maharashtra (ಮಹಾರಾಷ್ಟ್ರ)</option>
@@ -1178,24 +1180,24 @@
 <!-- Success Popup Modal -->
 <div id="successModal">
     <div class="modal-content-success">
-        <div style="width: 80px; height: 80px; background: #ecfdf5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px;">
+        <div style="width: 100px; height: 100px; background: #fff7ed; color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 50px;">
             <i class="fas fa-check-circle"></i>
         </div>
-        <h2 class="lang-text" data-en="Success!" data-kn="ಯಶಸ್ವಿಯಾಗಿದೆ!" style="color: #1e293b; margin-bottom: 10px; font-size: 2.2rem;">Success!</h2>
-        <p class="lang-text" data-en="Welcome to Akhila Bharata Veerashaiva Mahila Mahasabha" data-kn="ಅಖಿಲ ಭಾರತ ವೀರಶೈವ ಮಹಿಳಾ ಮಹಾಸಭೆಗೆ ಸುಸ್ವಾಗತ" style="font-size: 1.5rem; color: #f97316; font-weight: 700; margin-bottom: 25px; line-height: 1.4;">
-            Welcome to Akhila Bharata Veerashaiva Mahila Mahasabha
+        <h2 class="lang-text" data-en="Thank you for submitting your application and wellcome to veerashaiva mahasabha" data-kn="ನಿಮ್ಮ ಅರ್ಜಿಯನ್ನು ಸಲ್ಲಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು ಮತ್ತು ವೀರಶೈವ ಲಿಂಗಾಯತ ಮಹಿಳಾ ಮಹಾಸಭೆಗೆ ಸುಸ್ವಾಗತ" style="color: #1e293b; margin-bottom: 15px; font-size: 2rem; line-height: 1.3; font-weight: 800;">Thank you for submitting your application and wellcome to veerashaiva mahasabha</h2>
+        <p class="lang-text" data-en="designated person will contact you soon" data-kn="ನಿಯೋಜಿತ ವ್ಯಕ್ತಿಯು ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತಾರೆ" style="font-size: 1.1rem; color: #64748b; font-weight: 500; margin-bottom: 35px;">
+            designated person will contact you soon
         </p>
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
-            <button type="button" class="btn-apply" onclick="closeModalAndView()" style="width: 100%; padding: 12px 20px; background: #64748b; font-size: 1rem;">
-                <i class="fas fa-eye"></i> <span class="lang-text" data-en="View Application" data-kn="ಅರ್ಜಿಯನ್ನು ನೋಡಿ">View Application</span>
-            </button>
-            <button type="button" class="btn-apply" id="btnDownloadPDF" onclick="downloadApplicationPDF()" style="width: 100%; padding: 12px 20px; font-size: 1rem;">
+        <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <button type="button" class="btn-apply" id="btnDownloadPDF" onclick="downloadApplicationPDF()" style="width: 100%; padding: 16px 25px; font-size: 1.1rem; background: var(--primary-color);">
                 <i class="fas fa-file-pdf"></i> <span class="lang-text" data-en="Download Application (PDF)" data-kn="ಅರ್ಜಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ (PDF)">Download Application (PDF)</span>
             </button>
+            <button type="button" class="btn-apply" onclick="closeModalAndView()" style="width: 100%; padding: 14px 25px; background: #f1f5f9; color: #475569; font-size: 1rem; border: 1px solid #e2e8f0; box-shadow: none;">
+                <i class="fas fa-eye"></i> <span class="lang-text" data-en="View Application" data-kn="ಅರ್ಜಿಯನ್ನು ನೋಡಿ">View Application</span>
+            </button>
+            <button type="button" class="btn-apply" onclick="window.location.href='/'" style="width: 100%; padding: 12px 25px; background: transparent; color: #94a3b8; font-size: 0.95rem; border: none; box-shadow: none;">
+                <i class="fas fa-home"></i> <span class="lang-text" data-en="Back to Home" data-kn="ಮುಖಪುಟಕ್ಕೆ">Back to Home</span>
+            </button>
         </div>
-        <p style="margin-top: 20px; font-size: 0.85rem; color: #64748b;">
-            <a href="/membership" class="lang-text" data-en="Return to Membership Page" data-kn="ಸದಸ್ಯತ್ವ ಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ">Return to Membership Page</a>
-        </p>
     </div>
 </div>
 

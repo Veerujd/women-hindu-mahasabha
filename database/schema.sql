@@ -1,5 +1,5 @@
 -- ============================================================
--- Akhila Bharata Veerashaiva Mahila Mahasabha
+-- Akhila Bharata Veerashaiva Lingayatha Mahila Mahasabha
 -- Membership Applications Database Schema
 -- ============================================================
 

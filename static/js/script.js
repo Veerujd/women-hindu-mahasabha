@@ -472,27 +472,33 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   INTRODUCTION SECTION TOGGLE (ABOUT PAGE)
+   GENERIC TOGGLE FUNCTIONALITY (Read More / Less)
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.getElementById('toggle-intro-content');
-    const fullContent = document.getElementById('intro-full-content');
-    
-    if (toggleBtn && fullContent) {
-        toggleBtn.addEventListener('click', () => {
-            const isCollapsed = fullContent.classList.toggle('collapsed');
-            toggleBtn.classList.toggle('active', !isCollapsed);
-            
-            if (isCollapsed) {
-                toggleBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-                setTimeout(() => {
-                    toggleBtn.closest('.intro-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 300);
-            } else {
-                toggleBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            }
-        });
-    }
+    const setupToggle = (btnId, contentId, parentSelector) => {
+        const toggleBtn = document.getElementById(btnId);
+        const fullContent = document.getElementById(contentId);
+        
+        if (toggleBtn && fullContent) {
+            toggleBtn.addEventListener('click', () => {
+                const isCollapsed = fullContent.classList.toggle('collapsed');
+                toggleBtn.classList.toggle('active', !isCollapsed);
+                
+                if (isCollapsed) {
+                    toggleBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+                    setTimeout(() => {
+                        toggleBtn.closest(parentSelector).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                } else {
+                    toggleBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+                }
+            });
+        }
+    };
+
+    // Setup toggles for various pages
+    setupToggle('toggle-intro-content', 'intro-full-content', '.intro-section');
+    setupToggle('toggle-home-intro', 'home-intro-full-content', '.intro-section');
 });
 
 /* ==========================================================================
@@ -509,6 +515,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mock Events Data across multiple months/years
     const calendarEvents = [
+        { date: '2026-04-24', type: 'Program', title: 'National Women and Youth Divisions Inauguration Program', icon: 'fa-users', bgClass: 'festival-bg', tagClass: 'festival-tag', dotClass: 'festival-dot' },
+        { date: '2026-04-02', type: 'Special', title: 'Highlight Event', icon: 'fa-star', bgClass: 'festival-bg', tagClass: 'festival-tag', dotClass: 'festival-dot' },
         { date: '2026-04-06', type: 'Festival', title: 'Sri Rama Navami', icon: 'fa-gift', bgClass: 'festival-bg', tagClass: 'festival-tag', dotClass: 'festival-dot' },
         { date: '2026-04-20', type: 'Jayanthi', title: 'Basavanna Jayanthi', icon: 'fa-birthday-cake', bgClass: 'jayanthi-bg', tagClass: 'jayanthi-tag', dotClass: 'jayanthi-dot' },
         { date: '2026-05-18', type: 'Festival', title: 'Global Mahasammelan', icon: 'fa-om', bgClass: 'festival-bg', tagClass: 'festival-tag', dotClass: 'festival-dot' },
@@ -576,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Highlight chosen/today dates
-            if (year === 2026 && month === 3 && i === 10) {
+            if (year === 2026 && month === 3 && i === 2) {
                 daySpan.classList.add('selected-day');
             } else if (today.getFullYear() === year && today.getMonth() === month && today.getDate() === i && (year !== 2026 || month !== 3)) {
                  daySpan.classList.add('selected-day');

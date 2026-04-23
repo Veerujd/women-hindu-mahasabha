@@ -498,7 +498,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup toggles for various pages
     setupToggle('toggle-intro-content', 'intro-full-content', '.intro-section');
-    setupToggle('toggle-home-intro', 'home-intro-full-content', '.intro-section');
 });
 
 /* ==========================================================================

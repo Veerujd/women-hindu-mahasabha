@@ -6226,42 +6226,53 @@ body.body-scrolled .top-bar {
    ========================================================================== */
 @media screen and (max-width: 991px) {
     .leadership-ribbon {
-        padding: 5px 0 !important;
-        margin-bottom: 5px !important; /* Reduced gap below ribbon */
+        padding: 4px 0 !important;
+        margin-bottom: 2px !important;
     }
 
     .leadership-ribbon .ribbon-track {
-        gap: 4px !important;
+        gap: 2px !important; /* Minimum gap to fit all items */
         justify-content: center !important; /* Center items statically */
-        overflow: hidden !important; /* Disable sliding/scroll */
-        padding-bottom: 5px !important;
+        overflow: hidden !important; /* Prevent scrolling as requested */
+        padding: 5px 2px !important;
+        flex-wrap: nowrap !important;
     }
 
     .leadership-ribbon .ribbon-item {
-        flex: 0 0 16% !important; /* Exactly 1/6th for 6 items */
+        flex: 1 1 0 !important; /* Evenly distribute all 6 items */
+        max-width: 16.6% !important;
         flex-direction: column !important;
-        gap: 2px !important;
+        gap: 1px !important;
     }
 
     .leadership-ribbon .ribbon-img-wrapper {
-        width: 48px !important; /* Balanced size to fit 6 items statically */
-        height: 48px !important;
+        width: 42px !important; /* Reduced size to ensure 6-item fit */
+        height: 42px !important;
         margin-bottom: 2px !important;
     }
 
     .leadership-ribbon .ribbon-info {
         height: auto !important;
-        min-height: 35px !important;
+        min-height: 40px !important;
+        position: relative !important;
+    }
+
+    .leadership-ribbon .info-primary {
+        position: static !important;
     }
 
     .leadership-ribbon .ribbon-info strong {
-        font-size: 0.55rem !important; /* Tighter font for 6-item fit */
+        font-size: 0.48rem !important; /* Very small but fits */
         line-height: 1.1 !important;
-        word-break: break-word !important;
+        word-break: normal !important;
+        white-space: normal !important;
     }
 
     .leadership-ribbon .ribbon-info span {
-        display: none !important;
+        display: block !important;
+        font-size: 0.42rem !important;
+        line-height: 1.1 !important;
+        margin-top: 1px !important;
     }
 }
 
